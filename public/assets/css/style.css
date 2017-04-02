@@ -1,0 +1,97 @@
+/*
+    Author : Randy Vianda Putra
+    Email  : hello@randyviandaputra.com
+*/
+
+
+/* Body */
+
+body{
+    font-family: Tahoma;
+}
+
+/* Menu */
+
+.navbar.navbar-custom {
+    height: 70px;
+    background: #266080;
+    border-radius: 0;
+    border: none;
+    padding-top: 10px;
+}
+
+.navbar-custom .navbar-header .navbar-toggle,
+.navbar-custom .navbar-header .navbar-toggle:hover,
+.navbar-custom .navbar-header .navbar-toggle:focus {
+    border: none;
+    background: none;
+}
+
+.navbar-custom .navbar-header .navbar-toggle .icon-bar {
+    background: #fff;
+}
+
+.navbar-custom .collapse .navbar-nav > li > a,
+.navbar-custom .navbar-brand {
+    color: #fff;
+    font-size: 16px;
+}
+
+.navbar-custom .collapse .navbar-nav > li > a:hover,
+.navbar-custom .collapse .navbar-nav > li > a:focus {
+    background: none;
+    color: #fff;
+}
+
+.navbar-custom .collapse .navbar-nav .dropdown-menu {
+    margin-top: 10px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-image:none !important;
+    color: #FFFFFF;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color:#266080;
+    color: #FFFFFF;
+
+}
+
+@media (max-width: 767px) {
+    .navbar-custom .navbar-collapse {
+        background: #266080;
+    }
+}
+
+/* Header */
+
+.header{
+    background-color: #B1D5ED;
+}
+
+/* Content */
+.content-bottom{
+    background-color: #EAF2F9;
+    border-radius: 5px;
+}
+
+.content-bottom h2{
+    background-color: #B1D5ED;
+    padding: 10px;
+    color: #333;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* Footer */
+
+.footer{
+    background-color: #266080;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.footer p{
+    color: #ffffff;
+    font-size: 15px;
+}
