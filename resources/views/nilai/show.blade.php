@@ -9,7 +9,11 @@
             {{ $title }} 
             @if(Auth::user()->level == 1)
             <a href="{{ route('siswa.index') }}" class="btn btn-success btn-sm pull-left" ><i class="glyphicon glyphicon-chevron-left"></i> back</a>
-            <a href="{{ route('nilai.pdf',$siswa->no_induk_siswa) }}" class="btn btn-danger btn-sm pull-right" target="_blank"><i class="glyphicon glyphicon-save-file"></i> Seve to PDF</a>
+                @if(count($_GET) >= 1)
+                    @if($_GET['semester'] != "")
+                        <a href="{{ route('nilai.pdf',array($siswa->no_induk_siswa, $_GET['semester'])) }}" class="btn btn-danger btn-sm pull-right" target="_blank"><i class="glyphicon glyphicon-save-file"></i> Seve to PDF</a>
+                    @endif
+                @endif
             @endif
             </h2>
             <div class="row">
@@ -27,7 +31,7 @@
                                         <tr>
                                             <td>Kelas&nbsp;</td>
                                             <td>:&nbsp;</td>
-                                            <td>{{ ucfirst($siswa->nama_kelas) }}</td>
+                                            <td>{{ $siswa->tingkat."-".ucfirst($siswa->nama_kelas) }}</td>
                                         </tr>
                                         <tr>
                                             <td>Tempat dan tanggal Lahir&nbsp;</td>
@@ -39,12 +43,60 @@
                                             <td>:&nbsp;</td>
                                             <td>{{ $siswa->no_induk_siswa }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Semester&nbsp;</td>
+                                            <td>:&nbsp;</td>
+                                            <td>
+                                            <?php 
+                                            if($siswa->tingkat == 1)
+                                             {
+                                                $ganjil = 1;
+                                                $genap = 2;
+                                             }
+                                             elseif($siswa->tingkat == 2)
+                                             {
+                                                $ganjil = 3;
+                                                $genap = 4;
+                                             }
+                                             elseif($siswa->tingkat == 3)
+                                             {
+                                                $ganjil = 5;
+                                                $genap = 6;
+                                             }
+                                             elseif($siswa->tingkat == 4)
+                                             {
+                                                $ganjil = 7;
+                                                $genap = 8;
+                                             }
+                                             elseif($siswa->tingkat == 5)
+                                             {
+                                                $ganjil = 9;
+                                                $genap = 10;
+                                             }
+                                             elseif($siswa->tingkat == 6)
+                                             {
+                                                $ganjil = 11;
+                                                $genap = 12;
+                                             }
+                                            ?>
+                                            <form method="GET" action="{{route('nilai.show', $siswa->id_siswa)}}" accept-charset="UTF-8" class="form-inline">
+                                            <select name="semester" class="form-control">
+                                               <option value="">Semester</option>
+                                               <option value="{{$ganjil}}">{{$ganjil}}</option>
+                                               <option value="{{$genap}}">{{$genap}}</option>
+                                            </select>
+                                            <button class="btn btn-primary" type="submit">Cari</i></button>
+                                            </form>
+                                       </td>
+                                        </tr>
                                     </table>
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     
                                 </div>
+                            @if(count($_GET) >= 1)
+                                @if($_GET['semester'])
                                 <table class="table table-bordered" id="table">
                                     <tr>
                                         <th rowspan="2">Mata Pelajaran</th>
@@ -124,6 +176,8 @@
                                         <td>-</td>
                                     </tr>
                                 </table>
+                                @endif
+                            @endif
                             </div>
                         </div>
                     </div>

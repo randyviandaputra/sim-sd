@@ -71,23 +71,30 @@ class SiswaController extends Controller
             'jenis_kelamin' => 'required',
             'golongan_darah' => 'required',
             'alamat' => 'required',
-            'foto' => 'required',
             'telepon' => 'required',
             'agama' => 'required',
             'username' => 'required|unique:users'
         ]);
 
-        $file = $request->file('foto');
-        $guru = siswa::all();
-        $fileName = $file->getClientOriginalName();
-        $i=0;
-        foreach ($guru as $key) {
-            if ($i.$fileName == $key['foto'] ) {
-                $i++;
+        if (Input::hasFile('foto')) 
+        {
+            $file = $request->file('foto');
+            $siswa = siswa::all();
+            $fileName = $file->getClientOriginalName();
+            $i=0;
+            foreach ($siswa as $key) {
+                if ($i.$fileName == $key['foto'] ) {
+                    $i++;
+                }
             }
+            $namafoto = $i.$fileName;
+            $request->file('foto')->move("image/siswa", $namafoto);
+
         }
-        $namafoto = $i.$fileName;
-        $request->file('foto')->move("image/siswa", $namafoto);
+        else
+        {
+            $namafoto = "default.png";
+        }
 
         $query = array(
             'no_induk_siswa' => $request->input('no_induk_siswa'),
@@ -98,6 +105,7 @@ class SiswaController extends Controller
             'jenis_kelamin' => $request->input('jenis_kelamin'),
             'golongan_darah' => $request->input('golongan_darah'),
             'alamat' => $request->input('alamat'),
+            'hobi' => $request->input('hobi'),
             'foto' => $namafoto,
             'telepon' => $request->input('telepon'),
             'agama' => $request->input('agama')
@@ -137,8 +145,10 @@ class SiswaController extends Controller
         $data = siswa::find($id);
         if (Input::hasFile('foto')) 
         {
-            $y = substr('\2', 0,1);
-            unlink(public_path('image\siswa'.$y.$data->foto));
+            if ($data->foto != "default.png") {
+                $y = substr('\2', 0,1);
+                unlink(public_path('image\siswa'.$y.$data->foto));
+            }
             $file = $request->file('foto');
             $siswa = siswa::all();
             $fileName = $file->getClientOriginalName();

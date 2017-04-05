@@ -99,6 +99,16 @@
                                 </div>
                             </div>
                              <br>
+                             <br>
+                             <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Hobi </label>
+                                     <div class="col-md-3">
+                                        <textarea name="hobi" class="form-control">{{$data->hobi}}</textarea> 
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
                               <br>
 
 

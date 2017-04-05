@@ -80,17 +80,25 @@ class GuruController extends Controller
 
         $this->validate($request, $rules);
         $data = Guru::create($request->all());
-        $file = $request->file('foto');
-        $guru = Guru::all();
-        $fileName = $file->getClientOriginalName();
-        $i=0;
-        foreach ($guru as $key) {
-            if ($i.$fileName == $key['foto'] ) {
-                $i++;
+        if (Input::hasFile('foto')) 
+        {
+            $file = $request->file('foto');
+            $guru = Guru::all();
+            $fileName = $file->getClientOriginalName();
+            $i=0;
+            foreach ($guru as $key) {
+                if ($i.$fileName == $key['foto'] ) {
+                    $i++;
+                }
             }
+            $namafoto = $i.$fileName;
+            $request->file('foto')->move("image/guru", $namafoto);
+
         }
-        $namafoto = $i.$fileName;
-        $request->file('foto')->move("image/guru", $namafoto);
+        else
+        {
+            $namafoto = "default.png";
+        }
         $foto = Guru::where('id_guru',$data->id_guru);
         $foto->update(['foto'=>$namafoto]);
 
@@ -128,8 +136,10 @@ class GuruController extends Controller
         $data = Guru::find($id);
         if (Input::hasFile('foto')) 
         {
-            $y = substr('\2', 0,1);
-            unlink(public_path('image\guru'.$y.$data->foto));
+            if ($data->foto != "default.png") {
+                $y = substr('\2', 0,1);
+                unlink(public_path('image\guru'.$y.$data->foto));
+            }
             $file = $request->file('foto');
             $guru = Guru::all();
             $fileName = $file->getClientOriginalName();

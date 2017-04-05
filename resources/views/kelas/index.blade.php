@@ -27,7 +27,7 @@
                                 <?php $i = 1; ?>
                                 @foreach($data as $row)
                                 <tr>
-                                    <td><?php echo $row->nama_kelas ?></td>
+                                    <td><?php echo $row->tingkat."-".$row->nama_kelas ?></td>
                                     <td><?php echo $row->nama_guru ?></td>
                                     <td><?php echo $row->aktif == 'Y' ? 'Aktif' : 'Tidak Aktif' ?></td>
                                     <td style="text-align:center;width:15%;">

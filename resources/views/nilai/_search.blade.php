@@ -9,7 +9,7 @@
         <select class="form-control" name="cari_kelas" >
             <option value="">Pilih Kelas</option>
             @foreach($kelas as $key)
-            <option value="{{ $key->id_kelas }}">{{ $key->nama_kelas }}</option>
+            <option value="{{ $key->id_kelas }}">{{ $key['tingkat']."-".$key->nama_kelas }}</option>
             @endforeach
         </select>
     </div>

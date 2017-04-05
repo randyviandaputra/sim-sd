@@ -37,7 +37,7 @@
                                     <td>{{$row->nama_siswa}}</td>
                                     <td>{{$row->alamat}}</td>
                                     <td>{{$row->jenis_kelamin}}</td>
-                                    <td>{{$row->kelas->nama_kelas}}</td>
+                                    <td>{{$row->kelas->tingkat."-".$row->kelas->nama_kelas}}</td>
                                     <td>
                                     @if(Auth::user()->level == 3)
                                         @if ($menu == 'sampah')
@@ -53,25 +53,70 @@
                                     @if(Auth::user()->level == 1)
                                         <?php 
                                              $walikelas =  App\Models\kelas::where('id_guru',Auth::user()->user_id)->where('id_kelas','=',$row->id_kelas)->first();
-                                             $nilai = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->first();
                                              $guru = App\Models\Guru::where('id_guru','=',Auth::user()->user_id)->first();
+                                                if($row->kelas->tingkat == 1)
+                                             {
+                                                $ganjil = 1;
+                                                $genap = 2;
+                                             }
+                                             elseif($row->kelas->tingkat == 2)
+                                             {
+                                                $ganjil = 3;
+                                                $genap = 4;
+                                             }
+                                             elseif($row->kelas->tingkat == 3)
+                                             {
+                                                $ganjil = 5;
+                                                $genap = 6;
+                                             }
+                                             elseif($row->kelas->tingkat == 4)
+                                             {
+                                                $ganjil = 7;
+                                                $genap = 8;
+                                             }
+                                             elseif($row->kelas->tingkat == 5)
+                                             {
+                                                $ganjil = 9;
+                                                $genap = 10;
+                                             }
+                                             elseif($row->kelas->tingkat == 6)
+                                             {
+                                                $ganjil = 11;
+                                                $genap = 12;
+                                             }
+                                             $nilai1 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$ganjil)->first();
+                                             $nilai2 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$genap)->first();
                                         ?>
                                          @if($walikelas)       
                                             <a href="{{ route('nilai.show', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="show">
                                             <i class="glyphicon glyphicon-eye-open"></i></a>
                                          @endif
-                                         @if($nilai)
-                                            @if($nilai->id_matpel == $guru->id_matpel)
-                                             <a href="{{ route('nilai.edit',$nilai->id_nilai) }}" class="btn btn-xs btn-success" title="edit">
-                                            <i class="glyphicon glyphicon-pencil"></i></a>
+                                         @if($nilai1)
+                                            @if($nilai1->id_matpel == $guru->id_matpel)
+                                             <a href="{{ route('nilai.edit',array($nilai1->id_nilai, $ganjil)) }}" class="btn btn-xs btn-success" title="edit Semester {{$ganjil}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
                                             @else
-                                             <a href="{{ route('nilai.add',$row->id_siswa) }}" class="btn btn-xs btn-primary" title="isi">
-                                            <i class="glyphicon glyphicon-pencil"></i></a>
+                                             <a href="{{ route('nilai.add', array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
                                             @endif
                                         @else
-                                            <a href="{{ route('nilai.add',$row->id_siswa) }}" class="btn btn-xs btn-primary" title="isi">
-                                            <i class="glyphicon glyphicon-pencil"></i></a>
+                                            <a href="{{ route('nilai.add',array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
                                         @endif
+
+                                        @if($nilai2)
+                                            @if($nilai2->id_matpel == $guru->id_matpel)
+                                             <a href="{{ route('nilai.edit',array($nilai2->id_nilai, $genap)) }}" class="btn btn-xs btn-success" title="edit Semester {{$genap}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                            @else
+                                             <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
+                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                        @endif
+
                                     @endif
                                     </td>
                                 </tr>

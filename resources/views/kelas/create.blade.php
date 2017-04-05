@@ -12,6 +12,24 @@
                         <div class="panel-body">
                         <div class="form-body">
                         <form action="{{ route('kelas.store') }}" method="POST">
+
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Tingkat</label>
+                                    <div class="col-md-3">
+                                       <select name="tingkat" class="form-control">
+                                           <option value="">Tingkat</option>
+                                           <option value="1">1</option>
+                                           <option value="2">2</option>
+                                           <option value="3">3</option>
+                                           <option value="4">4</option>
+                                           <option value="5">5</option>
+                                           <option value="6">6</option>
+                                       </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
                             <div class="form-body">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Nama Kelas</label>

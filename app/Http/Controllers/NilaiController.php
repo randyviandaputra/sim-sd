@@ -39,9 +39,10 @@ class NilaiController extends Controller
         return view('nilai.index', compact('title', 'data','kelas'));
     }
 
-    public function add($id)
+    public function add($id,$semester)
     {
     	$data['query']= Siswa::join('kelas','kelas.id_kelas','=','siswas.id_kelas')->where('siswas.id_siswa','=',$id)->first();
+        $data['semester'] = $semester;
     	$data['guru'] = Guru::find(Auth::user()->user_id);
     	$data['matpel'] = matpel::find($data['guru']->id_matpel);
         return view('nilai.create', $data)->withTitle('Input Nilai');
@@ -63,9 +64,10 @@ class NilaiController extends Controller
         return redirect()->route('siswa.index');
     }
 
-    public function edit($id)
+    public function edit($id,$semester)
     {
         $data['query'] = transaksi_nilai::join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->join('kelas','kelas.id_kelas','=','siswas.id_kelas')->where('transaksi_nilais.id_nilai','=',$id)->first();
+        $data['semester'] = $semester;
     	$data['guru'] = Guru::find(Auth::user()->user_id);
     	$data['matpel'] = matpel::find($data['guru']->id_matpel);
         return view('nilai.edit', $data)->withTitle('Edit Nilai');
@@ -90,17 +92,21 @@ class NilaiController extends Controller
     {
         $data['title'] = 'Raport Siswa';
         $siswa = siswa::where('id_siswa','=',$id)->first();
+        $data['nilai'] = null;
+        if (Input::has('semester')){
+            $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',input::get('semester'))->get();
+        }
         $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$siswa->no_induk_siswa)->first();
-        $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->get();
         $data['matpel'] = matpel::all();
         return view('nilai.show', $data);
     }
 
-    public function pdf($id)
+    public function pdf($id,$semester)
     {
         $data['title'] = 'Raport Siswa';
         $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$id)->first();
-        $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->get();
+        $data['semester'] = $semester;
+        $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->where('transaksi_nilais.semester','=',$semester)->get();
         $data['matpel'] = matpel::all();
         $pdf = PDF::loadView('Nilai.pdf', $data);
         return $pdf->stream('Laporan-Nilai-Siswa_'.$data['siswa']->nama_siswa.'.pdf');

@@ -6869,11 +6869,8 @@ body{
 	</style>
     </head>
 <body>
-<div class="container">
-	<div id="main" class="row">
-		<div class="container">
-			<div class="row">	
-				<div class="col-md-12">
+
+			
 					<div class="panel panel-default">
 						<h3 class="text-center text-capitalize">{{ $title }}</h3>
 							<div class="panel-body">
@@ -6886,7 +6883,7 @@ body{
                   <tr>
                       <td>Kelas&nbsp;</td>
                       <td>:&nbsp;</td>
-                      <td>{{ ucfirst($siswa->nama_kelas) }}</td>
+                      <td>{{ $siswa->tingkat."-".ucfirst($siswa->nama_kelas) }}</td>
                   </tr>
                   <tr>
                       <td>Tempat dan tanggal Lahir&nbsp;</td>
@@ -6898,35 +6895,40 @@ body{
                       <td>:&nbsp;</td>
                       <td>{{ $siswa->no_induk_siswa }}</td>
                   </tr>
+                  <tr>
+                      <td>Semester&nbsp;</td>
+                      <td>:&nbsp;</td>
+                      <td>{{ $semester }}</td>
+                  </tr>
               </table>
               <br>
           </div>
             
-          <table class="table table-bordered" id="table">
+          <table class="table table-bordered" id="table" style="margin-left:3px; margin-right: 3px;">
               <tr>
-                  <th rowspan="2">Mata Pelajaran</th>
-                  <th rowspan="2">KKM</th>
+                  <td  align="center" rowspan="2" ><b>Mata Pelajaran</b></td>
+                  <td align="center" rowspan="2"><b>KKM</b></td>
                   <td colspan="4" align="center"><b>Nilai</b></td>
                   <th rowspan="2">Rata - rata</th>
               </tr>
               <tr>
-                  <td align="center">Tugas</td>
-                  <td align="center">Absensi</td>
-                  <td align="center">UTS</td>
-                  <td align="center">UAS</td>
+                  <td align="center"><b>Tugas</b></td>
+                  <td align="center"><b>Absensi</b></td>
+                  <td align="center"><b>UTS</b></td>
+                  <td align="center"><b>UAS</b></td>
               </tr>
               @foreach($matpel as $row)
               <tr>
-                  <td><b>{{ $row->nama_matpel }}</b></td>
-                  <td>{{ $row->kkm }}</td>
+                  <td>{{ $row->nama_matpel }}</td>
+                  <td align="center">{{ $row->kkm }}</td>
                   @if(count($nilai) >= 1)
                       @foreach($nilai as $riw)
                           @if($row->id_matpel == $riw->id_matpel)
-                              <td>{{ $riw->nilai_tugas }}</td>
-                              <td>{{ $riw->nilai_absensi }}</td>
-                              <td>{{ $riw->nilai_uts }}</td>
-                              <td>{{ $riw->nilai_uas }}</td>
-                              <td>{{ $riw->nilai_rata_rata }}</td>
+                              <td align="center">{{ $riw->nilai_tugas }}</td>
+                              <td align="center">{{ $riw->nilai_absensi }}</td>
+                              <td align="center">{{ $riw->nilai_uts }}</td>
+                              <td align="center">{{ $riw->nilai_uas }}</td>
+                              <td align="center">{{ $riw->nilai_rata_rata }}</td>
                           @else
                               <td>&nbsp;</td>
                               <td>&nbsp;</td>
@@ -6958,11 +6960,11 @@ body{
                       $uas += $key['nilai_uas']; 
                   }
                   ?>
-                  <td>{{ $tugas }}.00</td>
-                  <td>{{ $absen }}.00</td>
-                  <td>{{ $uts }}.00</td>
-                  <td>{{ $uas }}.00</td>
-                  <td>-</td>
+                  <td align="center">{{ $tugas }}.00</td>
+                  <td align="center">{{ $absen }}.00</td>
+                  <td align="center">{{ $uts }}.00</td>
+                  <td align="center">{{ $uas }}.00</td>
+                  <td align="center">-</td>
               </tr>
               <tr>
                   <td colspan="2" align="center"><b>Rata Rata</b></td>
@@ -6974,20 +6976,16 @@ body{
                       $ruts= $uts/$jumlah;
                       $ruas= $uas/$jumlah;
                   ?>
-                  <td>{{ $rtugas }}</td>
-                  <td>{{ $rabsen }}</td>
-                  <td>{{ $ruts }}</td>
-                  <td>{{ $ruas }}</td>
-                  <td>-</td>
+                  <td align="center">{{ $rtugas }}</td>
+                  <td align="center">{{ $rabsen }}</td>
+                  <td align="center">{{ $ruts }}</td>
+                  <td align="center">{{ $ruas }}</td>
+                  <td align="center">-</td>
               </tr>
           </table>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      
 
 <!-- Footer -->
     

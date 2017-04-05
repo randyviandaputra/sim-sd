@@ -19,6 +19,7 @@ class transaksi_nilai extends Model
         'nilai_uts',
         'nilai_uas',
         'nilai_rata_rata',
+        'semester',
     ];
     public function siswa()
     {

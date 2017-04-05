@@ -21,6 +21,7 @@ class CreateTransaksiNilaisTable extends Migration
             $table->decimal('nilai_uts');
             $table->decimal('nilai_uas');
             $table->decimal('nilai_rata_rata');
+            $table->integer('semester');
             $table->timestamps();
             $table->softDeletes();
         });

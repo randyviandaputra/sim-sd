@@ -28,7 +28,7 @@
                                       <select class="form-control" name="id_kelas">
                                           <option>Pilih Kelas</option>
                                           @foreach($kelas as $key)
-                                          <option value="{{ $key['id_kelas']}}">{{ $key['nama_kelas'] }}</option>
+                                          <option value="{{ $key['id_kelas']}}">{{ $key['tingkat']."-".$key['nama_kelas'] }}</option>
                                           @endforeach
                                       </select>
                                     </div>
@@ -98,6 +98,17 @@
                             </div>
                              <br>
                               <br>
+
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Hobi </label>
+                                     <div class="col-md-3">
+                                        <textarea name="hobi" class="form-control"></textarea> 
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
+                             <BR>
 
                             <div class="form-body">
                                 <div class="form-group">

@@ -1,10 +1,11 @@
 
 <div class="form-body">
-    Nama : {{ $query->nama_siswa }}&nbsp;&nbsp; Kelas : {{ $query->nama_kelas }}
+    Nama : {{ $query->nama_siswa }}&nbsp;&nbsp; Kelas : {{ $query->tingkat."".$query->nama_kelas }}
     <br>
     <div class="col-md-3">
     {!! Form::hidden('no_induk_siswa', $query->no_induk_siswa) !!}
     {!! Form::hidden('id_guru', Auth::user()->user_id) !!}
+    {!! Form::hidden('semester', $semester) !!}
     </div>
     <legend>Input Nilai {{ $matpel->nama_matpel }}</legend>
     <div class="form-group">
@@ -41,6 +42,14 @@
             @if($errors->has('nilai_uas'))
             <span class="help-block" style="color:red;">{{ $errors->first('nilai_uas') }}</span>
             @endif
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('', 'semester', array('class' => 'col-md-3 control-label')) !!}
+        <div class="col-md-3">
+            <p class="form-control-static">
+            {{ $semester }}
+            </p>
         </div>
     </div>
     <div class="form-group">

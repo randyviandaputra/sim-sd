@@ -14,6 +14,7 @@ class kelas extends Model
         'id_guru',
         'nama_kelas',
         'aktif',
+        'tingkat',
     ];
 
      public function siswa()
