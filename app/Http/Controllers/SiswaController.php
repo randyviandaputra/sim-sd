@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\matpel;
 use Illuminate\Support\Facades\Input;
 
+use App\Http\Requests\siswaRequest;
 use App\Http\Requests;
 
 use PDF;
@@ -60,20 +61,8 @@ class SiswaController extends Controller
     }
 
   
-    public function store(Request $request)
+    public function store(siswaRequest $request)
     {
-        $this->validate($request, [
-            'id_kelas' => 'required',
-            'nama_siswa' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'jenis_kelamin' => 'required',
-            'golongan_darah' => 'required',
-            'alamat' => 'required',
-            'telepon' => 'required',
-            'agama' => 'required',
-            'username' => 'required|unique:users'
-        ]);
 
         if (Input::hasFile('foto')) 
         {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\matpel;
 use App\Http\Requests;
+use App\Http\Requests\matpelRequest;
 
 class MatpelController extends Controller
 {
@@ -30,14 +31,8 @@ class MatpelController extends Controller
 		return view('matpel.create',$data);
 	}
 
-	public function store(Request $request)
+	public function store(matpelRequest $request)
 	{
-		$rules = array(
-                    'kode_matpel' => 'required',
-                    'nama_matpel' => 'required',
-                    'kkm' => 'required',
-                  );
-        $this->validate($request, $rules);
         $data = matpel::create($request->all());
         return redirect('matpel');
 

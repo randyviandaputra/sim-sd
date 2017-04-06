@@ -11,6 +11,17 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
+                        @if ($errors->any())
+                          <div class="alert alert-danger alert-dismissible" role="alert">
+                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><em>
+                          <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                         </ul>
+                        </em>
+                        </div>
+                        @endif
                         <form action="{{ route('kelas.store') }}" method="POST">
 
                             <div class="form-body">

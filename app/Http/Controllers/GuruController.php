@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\matpel;
 use App\Models\siswa;
 
+use App\Http\Requests\guruRequest;
+
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
@@ -67,18 +69,8 @@ class GuruController extends Controller
     }
 
   
-    public function store(Request $request)
+    public function store(guruRequest $request)
     {
-        $rules = array(
-                    'nama_guru' => 'required',
-                    'id_matpel' => 'required',
-                    'alamat'    => 'required',
-                    'tempat_lahir' => 'required',
-                    'tanggal_lahir'    => 'required',
-                    'jenis_kelamin' => 'required',
-                  );
-
-        $this->validate($request, $rules);
         $data = Guru::create($request->all());
         if (Input::hasFile('foto')) 
         {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\kelas;
 use App\Models\Guru;
+use App\Http\Requests\kelasRequest;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
@@ -45,13 +46,8 @@ class KelasController extends Controller
         return view('kelas.create',compact('title','guru'));
     }
 
-    public function store(Request $request)
+    public function store(kelasRequest $request)
     {
-        $rules = array(
-            'nama_kelas' => 'required',
-            'aktif' => 'required' 
-        );
-        $this->validate($request,$rules);
         $data = kelas::create($request->all());
         return redirect('kelas');
     }
