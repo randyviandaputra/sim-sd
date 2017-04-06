@@ -82,7 +82,13 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">golongan darah</label>
                                     <div class="col-md-3">
-                                       <input type="text" name="golongan_darah" class="form-control">
+                                        <select name="golongan_darah" class="form-control">
+                                            <option value="">Pilih Golongan Darah</option>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="O">O</option>
+                                            <option value="AB">AB</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

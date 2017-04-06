@@ -16,11 +16,11 @@ class CreateTransaksiNilaisTable extends Migration
             $table->increments('id_nilai');
             $table->integer('id_guru');
             $table->string('no_induk_siswa');
-            $table->decimal('nilai_tugas');
-            $table->decimal('nilai_absensi');
-            $table->decimal('nilai_uts');
-            $table->decimal('nilai_uas');
-            $table->decimal('nilai_rata_rata');
+            $table->float('nilai_tugas');
+            $table->float('nilai_absensi');
+            $table->float('nilai_uts');
+            $table->float('nilai_uas');
+            $table->float('nilai_rata_rata');
             $table->integer('semester');
             $table->timestamps();
             $table->softDeletes();

@@ -6909,7 +6909,7 @@ body{
                   <td  align="center" rowspan="2" ><b>Mata Pelajaran</b></td>
                   <td align="center" rowspan="2"><b>KKM</b></td>
                   <td colspan="4" align="center"><b>Nilai</b></td>
-                  <th rowspan="2">Rata - rata</th>
+                  <td  align="center" rowspan="2"><b>Rata - rata<b></td>
               </tr>
               <tr>
                   <td align="center"><b>Tugas</b></td>
@@ -6921,22 +6921,17 @@ body{
               <tr>
                   <td>{{ $row->nama_matpel }}</td>
                   <td align="center">{{ $row->kkm }}</td>
-                  @if(count($nilai) >= 1)
-                      @foreach($nilai as $riw)
-                          @if($row->id_matpel == $riw->id_matpel)
-                              <td align="center">{{ $riw->nilai_tugas }}</td>
-                              <td align="center">{{ $riw->nilai_absensi }}</td>
-                              <td align="center">{{ $riw->nilai_uts }}</td>
-                              <td align="center">{{ $riw->nilai_uas }}</td>
-                              <td align="center">{{ $riw->nilai_rata_rata }}</td>
-                          @else
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                              <td>&nbsp;</td>
-                          @endif
-                      @endforeach
+                   <?php
+                      if ($semester){
+                          $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$semester)->where('gurus.id_matpel','=',$row->id_matpel)->first();
+                      }
+                  ?>
+                  @if($cek)
+                      <td align="center" <?php echo $cek->nilai_tugas < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_tugas }}</td>
+                      <td align="center" <?php echo $cek->nilai_absensi < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_absensi }}</td>
+                      <td align="center" <?php echo $cek->nilai_uts < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_uts }}</td>
+                      <td align="center" <?php echo $cek->nilai_uas < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_uas }}</td>
+                      <td align="center" >{{ $cek->nilai_rata_rata }}</td>
                   @else
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
@@ -6960,10 +6955,10 @@ body{
                       $uas += $key['nilai_uas']; 
                   }
                   ?>
-                  <td align="center">{{ $tugas }}.00</td>
-                  <td align="center">{{ $absen }}.00</td>
-                  <td align="center">{{ $uts }}.00</td>
-                  <td align="center">{{ $uas }}.00</td>
+                  <td align="center">{{ $tugas }}</td>
+                  <td align="center">{{ $absen }}</td>
+                  <td align="center">{{ $uts }}</td>
+                  <td align="center">{{ $uas }}</td>
                   <td align="center">-</td>
               </tr>
               <tr>
@@ -6976,11 +6971,11 @@ body{
                       $ruts= $uts/$jumlah;
                       $ruas= $uas/$jumlah;
                   ?>
-                  <td align="center">{{ $rtugas }}</td>
-                  <td align="center">{{ $rabsen }}</td>
-                  <td align="center">{{ $ruts }}</td>
-                  <td align="center">{{ $ruas }}</td>
-                  <td align="center">-</td>
+                   <td align="center">{{substr($rtugas, 0, 5)}}</td>
+                    <td align="center">{{ substr($rabsen,0, 5) }}</td>
+                    <td align="center">{{ substr($ruts,0, 5) }}</td>
+                    <td align="center">{{ substr($ruas,0, 5) }}</td>
+                    <td align="center">-</td>
               </tr>
           </table>
               </div>

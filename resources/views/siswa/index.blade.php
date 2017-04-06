@@ -84,8 +84,8 @@
                                                 $ganjil = 11;
                                                 $genap = 12;
                                              }
-                                             $nilai1 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$ganjil)->first();
-                                             $nilai2 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$genap)->first();
+                                             $nilai1 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$ganjil)->where('transaksi_nilais.id_guru','=',Auth::user()->user_id)->first();
+                                             $nilai2 = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$row->no_induk_siswa)->where('transaksi_nilais.semester','=',$genap)->where('transaksi_nilais.id_guru','=',Auth::user()->user_id)->first();
                                         ?>
                                          @if($walikelas)       
                                             <a href="{{ route('nilai.show', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="show">

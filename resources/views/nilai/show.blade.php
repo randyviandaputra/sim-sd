@@ -97,39 +97,34 @@
                                 </div>
                             @if(count($_GET) >= 1)
                                 @if($_GET['semester'])
-                                <table class="table table-bordered" id="table">
-                                    <tr>
-                                        <th rowspan="2">Mata Pelajaran</th>
-                                        <th rowspan="2">KKM</th>
-                                        <td colspan="4" align="center"><b>Nilai</b></td>
-                                        <th rowspan="2">Rata - rata</th>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">Tugas</td>
-                                        <td align="center">Absensi</td>
-                                        <td align="center">UTS</td>
-                                        <td align="center">UAS</td>
-                                    </tr>
+                                <table class="table table-bordered" id="table" style="margin-left:3px; margin-right: 3px;">
+                                      <tr>
+                                          <td  align="center" rowspan="2" ><b>Mata Pelajaran</b></td>
+                                          <td align="center" rowspan="2"><b>KKM</b></td>
+                                          <td colspan="4" align="center"><b>Nilai</b></td>
+                                          <td  align="center" rowspan="2"><b>Rata - rata<b></td>
+                                      </tr>
+                                      <tr>
+                                          <td align="center"><b>Tugas</b></td>
+                                          <td align="center"><b>Absensi</b></td>
+                                          <td align="center"><b>UTS</b></td>
+                                          <td align="center"><b>UAS</b></td>
+                                      </tr>
                                     @foreach($matpel as $row)
                                     <tr>
-                                        <td><b>{{ $row->nama_matpel }}</b></td>
-                                        <td>{{ $row->kkm }}</td>
-                                        @if(count($nilai) >= 1)
-                                            @foreach($nilai as $riw)
-                                                @if($row->id_matpel == $riw->id_matpel)
-                                                    <td>{{ $riw->nilai_tugas }}</td>
-                                                    <td>{{ $riw->nilai_absensi }}</td>
-                                                    <td>{{ $riw->nilai_uts }}</td>
-                                                    <td>{{ $riw->nilai_uas }}</td>
-                                                    <td>{{ $riw->nilai_rata_rata }}</td>
-                                                @else
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                @endif
-                                            @endforeach
+                                          <td>{{ $row->nama_matpel }}</td>
+                                          <td align="center">{{ $row->kkm }}</td>
+                                        <?php
+                                            if ($_GET['semester']){
+                                                $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$_GET['semester'])->where('gurus.id_matpel','=',$row->id_matpel)->first();
+                                            }
+                                        ?>
+                                        @if($cek)
+                                              <td align="center" <?php echo $cek->nilai_tugas < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_tugas }}</td>
+                                              <td align="center" <?php echo $cek->nilai_absensi < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_absensi }}</td>
+                                              <td align="center" <?php echo $cek->nilai_uts < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_uts }}</td>
+                                              <td align="center" <?php echo $cek->nilai_uas < $row->kkm ? 'style="color:red;"' : '' ?>>{{ $cek->nilai_uas }}</td>
+                                              <td align="center" >{{ $cek->nilai_rata_rata }}</td>
                                         @else
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
@@ -153,11 +148,11 @@
                                             $uas += $key['nilai_uas']; 
                                         }
                                         ?>
-                                        <td>{{ $tugas }}.00</td>
-                                        <td>{{ $absen }}.00</td>
-                                        <td>{{ $uts }}.00</td>
-                                        <td>{{ $uas }}.00</td>
-                                        <td>-</td>
+                                        <td align="center">{{ $tugas }}</td>
+                                        <td align="center">{{ $absen }}</td>
+                                        <td align="center">{{ $uts }}</td>
+                                        <td align="center">{{ $uas }}</td>
+                                        <td align="center">-</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center"><b>Rata Rata</b></td>
@@ -169,11 +164,11 @@
                                             $ruts= $uts/$jumlah;
                                             $ruas= $uas/$jumlah;
                                         ?>
-                                        <td>{{ $rtugas }}</td>
-                                        <td>{{ $rabsen }}</td>
-                                        <td>{{ $ruts }}</td>
-                                        <td>{{ $ruas }}</td>
-                                        <td>-</td>
+                                            <td align="center">{{substr($rtugas, 0, 5)}}</td>
+                                            <td align="center">{{ substr($rabsen,0, 5) }}</td>
+                                            <td align="center">{{ substr($ruts,0, 5) }}</td>
+                                            <td align="center">{{ substr($ruas,0, 5) }}</td>
+                                            <td align="center">-</td>
                                     </tr>
                                 </table>
                                 @endif
