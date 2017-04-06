@@ -12,14 +12,6 @@
                         <div class="panel-body">
                         <div class="form-body">
                         <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">No Induk</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="no_induk_siswa" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
                             <br>
                             <div class="form-body">
                                 <div class="form-group">

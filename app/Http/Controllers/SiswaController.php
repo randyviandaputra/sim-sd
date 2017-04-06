@@ -63,7 +63,6 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'no_induk_siswa' => 'required',
             'id_kelas' => 'required',
             'nama_siswa' => 'required',
             'tempat_lahir' => 'required',
@@ -97,7 +96,6 @@ class SiswaController extends Controller
         }
 
         $query = array(
-            'no_induk_siswa' => $request->input('no_induk_siswa'),
             'id_kelas' => $request->input('id_kelas'),
             'nama_siswa' => $request->input('nama_siswa'),
             'tempat_lahir' => $request->input('tempat_lahir'),
@@ -111,7 +109,33 @@ class SiswaController extends Controller
             'agama' => $request->input('agama')
         );
 
+        $wer = siswa::orderBy('id_siswa', 'desc')->get();
+        foreach ($wer as $wor) {
+            $ech =  $wor->no_induk_siswa;
+            break;
+        }
         $data = siswa::create($query);
+        $ids = $data->id_siswa;
+        $tahun1 = substr(date('Y'),2);
+        $tahun2 = $tahun1+1;
+        $awal = $tahun1.$tahun2.'1';
+        if ($awal == substr($ech,0,5)) {
+            $q = substr($ech,5)+1;
+        }else{
+            $q = 1;
+        }
+        if (strlen($q) == 1) {
+            $akhir = '00'.$q;
+        }elseif (strlen($q) == 2) {
+            $akhir = '0'.$q;
+        }else{
+            $akhir = $q;
+        }
+        $ndk = $awal.$akhir;
+        $no_induk_siswa = array(
+            'no_induk_siswa' => $ndk
+        );
+        $fix = siswa::where('id_siswa','=',$ids)->update($no_induk_siswa);
         $sql = array(
             'user_id' => $data->id_siswa,
             'username' => $request->input('username'),

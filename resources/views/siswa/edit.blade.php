@@ -17,6 +17,14 @@
                         <form action="{{ route('siswa.update',$data->id_siswa) }}" method="POST" enctype="multipart/form-data">
                             <div class="form-body">
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label">No Induk </label>
+                                    <div class="col-md-3">
+                                       <input type="text" name="nama_siswa" class="form-control" value="{{$data->no_induk_siswa}}" disabled>
+                                    </div>
+                                </div>
+                            </div><br>
+                            <div class="form-body">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">Kelas</label>
                                     <div class="col-md-3">
                                       <select class="form-control" name="id_kelas">
