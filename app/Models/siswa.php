@@ -18,6 +18,7 @@ class siswa extends Model
     {
         return $this->belongsTo('\App\Models\Kelas', 'id_kelas', 'id_kelas');
     }
+    
     public static function boot()
     {
         parent::boot();

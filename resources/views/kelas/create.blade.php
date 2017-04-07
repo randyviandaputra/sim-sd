@@ -11,20 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
-                        @if ($errors->any())
-                          <div class="alert alert-danger alert-dismissible" role="alert">
-                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><em>
-                          <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                         </ul>
-                        </em>
-                        </div>
-                        @endif
-                        <form action="{{ route('kelas.store') }}" method="POST">
-
-                            <div class="form-body">
+                        <form action="{{ route('kelas.store') }}" method="POST" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Tingkat</label>
                                     <div class="col-md-3">
@@ -37,20 +24,24 @@
                                            <option value="5">5</option>
                                            <option value="6">6</option>
                                        </select>
+
+                                       @if($errors->has('tingkat'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Nama Kelas</label>
                                     <div class="col-md-3">
                                        <input type="text" name="nama_kelas" class="form-control">
+
+                                       @if($errors->has('nama_kelas'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('nama_kelas') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Wali Kelas</label>
                                     <div class="col-md-3">
@@ -60,11 +51,13 @@
                                            <option value="{{ $key->id_guru }}">{{ $key->nama_guru }}</option>
                                            @endforeach
                                        </select>
+
+                                       @if($errors->has('id_guru'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('id_guru') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Status</label>
                                     <div class="col-md-3">
@@ -73,6 +66,10 @@
                                            <option value="Y">Aktif</option>
                                            <option value="N">Tidak Aktif</option>
                                        </select>
+
+                                       @if($errors->has('aktif'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('aktif') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

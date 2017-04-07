@@ -11,41 +11,38 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
-                        @if ($errors->any())
-                          <div class="alert alert-danger alert-dismissible" role="alert">
-                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><em>
-                          <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                         </ul>
-                        </em>
-                        </div>
-                        @endif
-                        <form action="{{ route('matpel.store') }}" method="POST">
-                            <div class="form-body">
+                        
+                        <form action="{{ route('matpel.store') }}" method="POST" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Kode Matpel</label>
                                     <div class="col-md-3">
                                        <input type="text" name="kode_matpel" class="form-control">
+
+                                       @if($errors->has('kode_matpel'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('kode_matpel') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Nama Matpel</label>
                                     <div class="col-md-3">
                                        <input type="text" name="nama_matpel" class="form-control">
+
+                                       @if($errors->has('nama_matpel'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('nama_matpel') }}</span>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
+
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">KKM</label>
                                     <div class="col-md-3">
                                        <input type="text" name="kkm" class="form-control">
+
+                                       @if($errors->has('kkm'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('kkm') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
