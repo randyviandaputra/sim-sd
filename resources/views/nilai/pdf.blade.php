@@ -6874,7 +6874,8 @@ body{
 					<div class="panel panel-default">
 						<h3 class="text-center text-capitalize">{{ $title }}</h3>
 							<div class="panel-body">
-								<table align="center">
+              <br><br><br>
+								<table align="left">
                   <tr>
                       <td>Nama&nbsp;</td>
                       <td>:&nbsp;</td>

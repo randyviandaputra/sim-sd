@@ -30,6 +30,7 @@ class guruRequest extends Request
             'tempat_lahir' => 'required',
             'tanggal_lahir'    => 'required',
             'jenis_kelamin' => 'required',
+            'email' => 'required|unique:gurus',
             'username' => 'required|unique:users',
             'password' => 'required',
         ];
@@ -38,6 +39,8 @@ class guruRequest extends Request
     {
         return [
             'nama_guru.required' => 'Nama tidak boleh kosong.',
+            'email.required' => 'email tidak boleh kosong.',
+            'email.unique' => 'email sudah terdaftar',
             'no_induk_guru.required' => 'No Induk tidak boleh kosong',
             'no_induk_guru.unique' => 'no induk telah terdaftar',
             'id_matpel.required' => 'Mata Pelajaran wajib di pilih',

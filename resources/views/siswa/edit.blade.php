@@ -1,4 +1,4 @@
-@extends('pages.home')
+x@extends('pages.home')
 
 @section('content')
 
