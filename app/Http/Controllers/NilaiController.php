@@ -52,10 +52,10 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-                    'nilai_tugas' => 'required',
-                    'nilai_absensi'    => 'required',
-                    'nilai_uts' => 'required',
-                    'nilai_uas'    => 'required',
+                    'nilai_tugas' => 'required|numeric',
+                    'nilai_absensi'    => 'required|numeric',
+                    'nilai_uts' => 'required|numeric',
+                    'nilai_uas'    => 'required|numeric',
                   );
 
         $this->validate($request, $rules);
@@ -76,10 +76,10 @@ class NilaiController extends Controller
      public function update(Request $request, $id)
     {
         $rules = array(
-                    'nilai_tugas' => 'required',
-                    'nilai_absensi'    => 'required',
-                    'nilai_uts' => 'required',
-                    'nilai_uas'    => 'required',
+                    'nilai_tugas' => 'required|numeric',
+                    'nilai_absensi'    => 'required|numeric',
+                    'nilai_uts' => 'required|numeric',
+                    'nilai_uas'    => 'required|numeric',
                   );
 
         $this->validate($request, $rules);

@@ -31,7 +31,7 @@ class siswaRequest extends Request
             'jenis_kelamin' => 'required',
             'golongan_darah' => 'required',
             'alamat' => 'required',
-            'telepon' => 'required',
+            'telepon' => 'required|numeric',
             'agama' => 'required',
             'username' => 'required|unique:users',
             'password' => 'required'
@@ -49,6 +49,7 @@ class siswaRequest extends Request
             'alamat.required' => 'alamat tidak boleh kosong',
             'agama.required' => 'agama tidak boleh kosong',
             'telepon.required' => 'telepon tidak boleh kosong',
+            'telepon.numeric' => 'Nomor Telepon tidak boleh string',
             'username.required' => 'username tidak boleh kosong',
             'password.required' => 'password tidak boleh kosong',
             'username.unique' => 'username sudah terdaftar',
