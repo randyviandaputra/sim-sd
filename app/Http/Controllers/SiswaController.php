@@ -99,9 +99,14 @@ class SiswaController extends Controller
         );
 
         $wer = siswa::orderBy('id_siswa', 'desc')->get();
-        foreach ($wer as $wor) {
-            $ech =  $wor->no_induk_siswa;
-            break;
+        if (count($wer) >= 1) {
+            foreach ($wer as $wor) {
+                $ech =  $wor->no_induk_siswa;
+                break;
+            }
+        }
+        else{
+            $ech = 000;
         }
         $data = siswa::create($query);
         $ids = $data->id_siswa;
