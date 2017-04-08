@@ -12,7 +12,7 @@ use App\Models\siswa;
 use App\Http\Requests\guruRequest;
 
 use Illuminate\Support\Facades\Input;
-
+use Session;
 use App\Http\Requests;
 
 class GuruController extends Controller
@@ -64,6 +64,10 @@ class GuruController extends Controller
     {
         $data['title'] = 'Tambah Guru';
         $data['data'] = matpel::orderBy('nama_matpel', 'asc')->get();
+        if (count($data['data']) == 0) {
+            Session::put('add_guru','Tambah Mata Pelajaran terlebih dahulu');
+            return redirect()->route('matpel.add');
+        }
         return view('guru.create', $data);
 
     }
@@ -101,6 +105,10 @@ class GuruController extends Controller
         $user->level = 1;
         $user->akses = 'Y';
         $user->save(); 
+        if (Session::get('add_kelas') != null) {
+            Session()->forget('add_kelas');
+            return redirect()->route('kelas.add');
+        }
         return redirect('guru');
     }
 

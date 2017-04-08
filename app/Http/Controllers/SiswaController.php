@@ -15,12 +15,17 @@ use App\Http\Requests\siswaRequest;
 use App\Http\Requests;
 
 use PDF;
+use Session;
 
 class SiswaController extends Controller
 {
     
     public function index()
     {
+        
+        Session()->forget('add_kelas');
+        Session()->forget('add_guru');
+        Session()->forget('add_siswa');
         $data['title'] = 'Siswa';
         $data['menu'] = '';
 
@@ -57,6 +62,10 @@ class SiswaController extends Controller
     {
         $data['title'] = 'Tambah Siswa';
         $data['kelas'] = kelas::orderBy('nama_kelas', 'asc')->get();
+        if (count($data['kelas']) == 0) {
+            Session::put('add_siswa', 'Tambah Kelas Terlebih dahulu');
+            return redirect()->route('kelas.add');
+        }
         return view('siswa.create', $data);
     }
 

@@ -11,7 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
-                        
+                        <span style="color:red;">{{ Session::get('add_guru') }}</span>
                         <form action="{{ route('matpel.store') }}" method="POST" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Kode Matpel</label>

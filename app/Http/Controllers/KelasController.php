@@ -10,6 +10,7 @@ use App\Http\Requests\kelasRequest;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
+use Session;
 
 class KelasController extends Controller
 {
@@ -20,6 +21,10 @@ class KelasController extends Controller
      */
     public function index()
     {
+        
+        Session()->forget('add_kelas');
+        Session()->forget('add_guru');
+        Session()->forget('add_siswa');
         $title = 'Kelas';
         $guru = guru::all();
         $query = Kelas::join('gurus','gurus.id_guru','=','kelas.id_guru');
@@ -43,12 +48,20 @@ class KelasController extends Controller
     {
         $title = "Tambah Kelas";
         $guru = Guru::all();
+        if (count($guru) == 0) {
+            Session::put('add_kelas','Tambah Guru terlebih dahulu');
+            return redirect()->route('guru.add');
+        }
         return view('kelas.create',compact('title','guru'));
     }
 
     public function store(kelasRequest $request)
     {
         $data = kelas::create($request->all());
+        if (Session::get('add_siswa') != null) {
+            Session()->forget('add_siswa');
+            return redirect()->route('siswa.add');
+        }
         return redirect('kelas');
     }
 

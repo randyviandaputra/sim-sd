@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\matpel;
 use App\Http\Requests;
 use App\Http\Requests\matpelRequest;
+use Session;
 
 class MatpelController extends Controller
 {
 	public function index()
 	{
+		
+        Session()->forget('add_kelas');
+        Session()->forget('add_guru');
+        Session()->forget('add_siswa');
         $data['title'] = 'Mata Pelajaran';
         $data['menu'] = '';
         $data['data'] = matpel::orderBy('nama_matpel', 'asc')->get();
@@ -34,6 +39,10 @@ class MatpelController extends Controller
 	public function store(matpelRequest $request)
 	{
         $data = matpel::create($request->all());
+        if (Session::get('add_guru')) {
+        	Session()->forget('add_guru');
+        	return redirect()->route('guru.add');
+        }
         return redirect('matpel');
 
 	}

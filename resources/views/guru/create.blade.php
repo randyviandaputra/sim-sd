@@ -11,7 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
-                        
+                        <span style="color:red;">{{ Session::get('add_kelas') }}</span>
                         <form action="{{ route('guru.store') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
 
                             <div class="form-body">
