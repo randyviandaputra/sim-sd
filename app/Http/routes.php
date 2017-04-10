@@ -70,7 +70,7 @@ Route::group(['middleware' => 'tools'],function(){
 			route::get('/edit/{id}/{semester}',['uses' => 'NilaiController@edit', 'as' => 'nilai.edit']);
 			route::post('/edit/{id}',['uses' => 'NilaiController@update', 'as' => 'nilai.update']);
 			route::get('/show/{id}',['uses' => 'NilaiController@show', 'as' => 'nilai.show']);
-			route::get('/pdf/{id}/{semester}',['uses' => 'NilaiController@pdf', 'as' => 'nilai.pdf']);
+			route::post('/pdf/{id}/{semester}',['uses' => 'NilaiController@pdf', 'as' => 'nilai.pdf']);
 		});
 	});
 });	

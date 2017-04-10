@@ -11,7 +11,62 @@
             <a href="{{ route('siswa.index') }}" class="btn btn-success btn-sm pull-left" ><i class="glyphicon glyphicon-chevron-left"></i> back</a>
                 @if(count($_GET) >= 1)
                     @if($_GET['semester'] != "")
-                        <a href="{{ route('nilai.pdf',array($siswa->no_induk_siswa, $_GET['semester'])) }}" class="btn btn-danger btn-sm pull-right" target="_blank"><i class="glyphicon glyphicon-save-file"></i> Seve to PDF</a>
+                        <a href="" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-save-file"></i> Seve to PDF</a>
+
+        <div class="modal fade in" id="show">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content frm">
+              <div class="modal-header" style="background-color: #003566 ; color: silver ;">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <div class="modal-title display-4" s id="myModalLabel" align="center" style="vertical-align: middle;"><h1>Detail</h1></div>
+              </div>
+              <div class="modal-body" style="margin:0; padding:0;">
+                <div class="embed-responsive embed-responsive-4by3">
+                <br>
+                <br>
+                <br>
+                  <form method="POST" action="{{ route('nilai.pdf',array($siswa->no_induk_siswa, $_GET['semester'])) }}" accept-charset="UTF-8" class="form-horizontal"  target="_parent">
+                    <div class="form-body">
+
+                      <div class="form-group">
+                        <label class="col-md-3 control-label">Catatan</label>
+                          <div class="col-md-9">
+                              <textarea name="catatan" class="form-control"></textarea>
+                          </div>
+                      </div>
+
+                      @if($_GET['semester'] == 2 || $_GET['semester'] == 4 || $_GET['semester'] == 6 || $_GET['semester'] == 8 || $_GET['semester'] == 10 || $_GET['semester'] == 12)
+                      <div class="form-group">
+                        <label class="col-md-3 control-label">Status</label>
+                          <div class="col-md-9">
+                              <select name="status" class="form-control">
+                                <option value="">Pilih</option>
+                                <option value="naik">Naik Kelas</option>
+                                <option value="tidak">Tidak Naik Kelas</option>
+                              </select>
+                          </div>
+                      </div>
+                      @else
+                          <input type="hidden" name="status" value="0">
+                       @endif
+                      <br>
+                       <div class="form-group">
+                          <div class="row pull-right" style="padding-right: 30px;">
+                              <div class="col-md-12">
+                                   <button class="btn btn-success">Simpan</button>
+                              </div>
+                          </div>
+                      </div>
+                            {{ csrf_field() }}
+
+                    </div>
+
+                  </form> 
+                    
+                </div>
+              </div>
+            </div>
+          </div>
                     @endif
                 @endif
             @endif

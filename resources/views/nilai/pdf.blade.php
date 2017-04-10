@@ -6869,8 +6869,6 @@ body{
 	</style>
     </head>
 <body>
-
-			
 					<div class="panel panel-default">
 						<h3 class="text-center text-capitalize">{{ $title }}</h3>
 							<div class="panel-body">
@@ -6978,9 +6976,56 @@ body{
                     <td align="center">{{ substr($ruas,0, 5) }}</td>
                     <td align="center">-</td>
               </tr>
+              <tr>
+                <td colspan="7" align="center">Peringkat kelas ke <i>@php echo $ranking == 0 ? ''.count($all).'' : ''.$ranking.'' @endphp</i> dari <i>{{ count($all) }}</i> Siswa</td>
+              </tr>
           </table>
-              </div>
-            </div>
+
+      <div class="panel panel-default" style="margin-left:3px; margin-right: 3px; border-radius: 0px;">
+        <div class="panel-body">
+        <h5>Catatan : </h5>
+        <h5 align="center">"{{$catatan}}"</h5>
+        </div>
+      </div>
+        @if($semester == 2 || $semester == 4 || $semester == 6 || $semester == 8 || $semester == 10 || $semester == 12)
+      <div style="margin-left:10px; margin-right: 3px;">
+        Keputusan :<br>
+        Dengan memperhatikan hasil yang dicapai
+        pada semester {{$semester}} maka siswa ditetapkan
+        @if($status == "naik")
+        <i><u>Naik ke kelas {{$siswa->tingkat + 1}}</u></i>
+      @else
+        <i><u>Tinggal di kelas {{$siswa->tingkat}}</u></i>
+        <br><br>
+        <br><br>
+      @endif
+      </div>
+        @endif
+        <p align="right" style="margin-right: 40px;">Tanggal : {{ date('d, F Y')}}</p><br>
+        <table align="center" style="width: 100%;">
+          <tr>
+              <td align="center">Orang Tua / Wali</td>
+              <td align="center">Wali Kelas</td>
+              <td align="center">Mengetahui;<br>Kepala Sekolah</td>
+          </tr>
+          <tr>
+              <td style="height: 80px;">&nbsp;</td>
+              <td style="height: 80px;">&nbsp;</td>
+              <td style="height: 80px;">&nbsp;</td>
+          </tr>
+          <tr>
+              <td align="center">..............</td>
+              <td align="center">{{ $guru->nama_guru }}<br> NIP.{{ $guru->no_induk_guru }}</td>
+              <td align="center">..............<br>NIP.</td>
+          </tr>
+
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+  </div>
       
 
 <!-- Footer -->

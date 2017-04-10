@@ -10,7 +10,7 @@ use App\Models\siswa;
 use App\Models\User;
 use App\Models\matpel;
 use App\Models\transaksi_nilai;
-use Auth, PDF;
+use Auth, PDF, DB;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
@@ -101,13 +101,32 @@ class NilaiController extends Controller
         return view('nilai.show', $data);
     }
 
-    public function pdf($id,$semester)
+    public function pdf(Request $request,$id,$semester)
     {
+        $data['catatan'] = $request->input('catatan');
+        $data['status'] = $request->input('status');
         $data['title'] = 'Raport Siswa';
         $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$id)->first();
+        $data['all'] = siswa::all();
         $data['semester'] = $semester;
         $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->where('transaksi_nilais.semester','=',$semester)->get();
         $data['matpel'] = matpel::all();
+        $dia = DB::table('transaksi_nilais')->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.no_induk_siswa','=',$id)->where('siswas.id_kelas','=',$data['siswa']->id_kelas)->select(DB::raw('sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->first();
+        $semua = DB::table('transaksi_nilais')->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('siswas.id_kelas','=',$data['siswa']->id_kelas)->select(DB::raw('siswas.no_induk_siswa ,sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->groupBy('no_induk_siswa')->orderBy('total','DESC')->get();
+        if ($dia->total == null) {
+                $data['ranking'] = 0;
+        }
+        else{
+            $ranking = 0;
+            foreach ($semua as $key) {
+                $ranking++;
+                if ($dia->total == $key->total) {
+                    $data['ranking'] = $ranking;
+                    break;
+                }
+            }
+        }
+        $data['guru'] = guru::where('id_guru','=',Auth::user()->user_id)->first();
         $pdf = PDF::loadView('Nilai.pdf', $data);
         return $pdf->stream('Laporan-Nilai-Siswa_'.$data['siswa']->nama_siswa.'.pdf');
     }
