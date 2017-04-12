@@ -26,6 +26,7 @@
 							  	<th>Nilai UAS</th>
 							  	<th>Nilai Rata-Rata</th>
 							  	<th>Semester</th>
+							  	<th>Angkatan</th>
 							  	<th>&nbsp;</th>
 							  </thead>
 							  <tbody>
@@ -35,7 +36,7 @@
 							  		<td>{{ $i++ }}</td>
 							  		<td>{{ $row->no_induk_siswa }}</td>
 							  		<td>{{ $row->nama_siswa }}</td>
-							  		<td>{{ $row->tingkat."-".$row->nama_kelas }}</td>
+							  		<td>{{ $row->kelas }}</td>
 							  		<td>{{ $row->nama_matpel }}</td>
 							  		<td>{{ $row->nilai_tugas }}</td>
 							  		<td>{{ $row->nilai_absensi }}</td>
@@ -43,6 +44,7 @@
 							  		<td>{{ $row->nilai_uas }}</td>
 							  		<td>{{ $row->nilai_rata_rata }}</td>
 							  		<td>{{ $row->semester }}</td>
+							  		<td>{{ $row->angkatan }}</td>
 							  		<td style="text-align:center;width:15%;">
 					                    <a href="{{ URL::route('nilai.edit', array($row->id_nilai, $row->semester)) }}" class="btn btn-xs btn-primary" title="Edit">
 					 	                   <i class="glyphicon glyphicon-edit"></i></a>

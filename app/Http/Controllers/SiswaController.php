@@ -9,11 +9,13 @@ use App\Models\Guru;
 use App\Models\siswa;
 use App\Models\User;
 use App\Models\matpel;
+use App\Models\jadwal_kelas;
+use App\Models\transaksi_nilai;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests\siswaRequest;
 use App\Http\Requests;
-
+use Auth;
 use PDF;
 use Session;
 
@@ -30,7 +32,16 @@ class SiswaController extends Controller
         $data['menu'] = '';
 
         $data['kelas'] = kelas::all();
+        $data['kelasGuru'] = jadwal_kelas::join('kelas','kelas.id_kelas','=','jadwal_kelas.id_kelas')->where('jadwal_kelas.id_guru','=',Auth::user()->user_id)->groupBy('jadwal_kelas.id_kelas')->get();
         $query = siswa::with('kelas')->orderBy('nama_siswa', 'asc');
+        if (Auth::user()->level == 1) {
+            if (count($data['kelasGuru']) == 0) {
+               $query = siswa::with('kelas')->where('id_kelas','=',0)->orderBy('nama_siswa', 'asc');
+            }
+            else{
+                $query = siswa::with('kelas')->where('id_kelas','=',$data['kelasGuru'][0]->id_kelas)->orderBy('nama_siswa', 'asc');
+            }
+        }
         if (Input::has('cari_nama')) {
             $query->where('nama_siswa','like','%'.Input::get('cari_nama').'%');
         }
@@ -92,6 +103,10 @@ class SiswaController extends Controller
         {
             $namafoto = "default.png";
         }
+        $kelas = kelas::find($request->input('id_kelas'));
+        $kurang = $kelas->tingkat - 1;
+        $tahun = date('Y');
+        $angkatan_tahun = $tahun - $kurang;
 
         $query = array(
             'id_kelas' => $request->input('id_kelas'),
@@ -104,7 +119,8 @@ class SiswaController extends Controller
             'hobi' => $request->input('hobi'),
             'foto' => $namafoto,
             'telepon' => $request->input('telepon'),
-            'agama' => $request->input('agama')
+            'agama' => $request->input('agama'),
+            'angkatan_tahun' => $angkatan_tahun,
         );
 
         $wer = siswa::orderBy('id_siswa', 'desc')->get();
@@ -240,5 +256,24 @@ class SiswaController extends Controller
         $user = User::where('user_id','=',$id)->where('level','=',2)->update($query);
         $data = siswa::withTrashed()->where('id_siswa','=',$id)->restore();
         return redirect('siswa');
+    }
+    public function kenaikan(Request $request)
+    {
+
+        $status = $request->input('status');
+        $nis = $request->input('nis');
+        for ($i=0; $i < count($status); $i++) {
+            if ($status[$i] == "naik") {
+                $siswa = siswa::where('no_induk_siswa','=',$nis[$i]);
+                $siswa->update(['id_kelas'=>$request->input('kelas')]);
+                $nilai = transaksi_nilai::where('no_induk_siswa','=',$nis[$i]);
+                $nilai->update(['status'=>'tidak']);
+            }
+            else{
+                $nilai = transaksi_nilai::where('no_induk_siswa','=',$nis[$i]);
+                $nilai->update(['status'=>'tidak']);
+            }
+        }
+        return redirect()->route('walikelas.index');
     }
 }

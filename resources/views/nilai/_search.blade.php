@@ -9,8 +9,18 @@
         <select class="form-control" name="cari_kelas" >
             <option value="">Pilih Kelas</option>
             @foreach($kelas as $key)
-            <option value="{{ $key->id_kelas }}">{{ $key['tingkat']."-".$key->nama_kelas }}</option>
+            <option value="{{ $key->id_kelas."-".$key->nama_kelas }}">{{ $key['tingkat']."-".$key->nama_kelas }}</option>
             @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <select class="form-control" name="cari_angkatan" >
+            <option value="">Cari tahun angkatan</option>
+            <?php 
+                 $tahun = date('Y');
+                 for ($i=$tahun; $i >= 1980 ; $i--) { ?>
+                    <option value="{{$i}}">{{$i}}</option>
+            <?php }?>
         </select>
     </div>
     <div class="form-group">

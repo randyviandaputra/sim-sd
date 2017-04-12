@@ -45,6 +45,20 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Untuk Tingkat :</label>
+                                    <div class="col-md-3">
+                                     <?php
+                                        for ($i=1; $i <= 6  ; $i++) {?>
+                                        {{$i}} <input type="checkbox" name="tingkat[]" id="akses" value="{{ $i }}">                                   
+                                    <?php }
+                                     ?>
+                                       @if($errors->has('tingkat'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <br><br>
                             <div class="form-group">

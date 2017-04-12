@@ -27,6 +27,7 @@ class CreateSiswasTable extends Migration
             $table->string('agama');
             $table->string('foto');
             $table->date('tanggal_masuk');
+            $table->integer('angkatan_tahun');
             $table->timestamps();
             $table->softDeletes();
         });

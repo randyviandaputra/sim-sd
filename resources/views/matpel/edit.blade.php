@@ -11,7 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                         <div class="form-body">
-                        <form action="{{ route('matpel.update',$data[0]->id_matpel) }}" method="POST">
+                        <form action="{{ route('matpel.update',$data[0]->id_matpel) }}" method="POST" class="form-horizontal">
                             <div class="form-body">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Kode Matpel</label>
@@ -38,6 +38,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                    <label class="col-md-3 control-label">Untuk Tingkat :</label>
+                                    <div class="col-md-3">
+                                    <?php
+                                        for ($i=1; $i < 7; $i++) {
+                                            $role = App\Models\role_matpel::where('id_matpel','=',$data[0]->id_matpel)->where('tingkat','=',$i)->first();
+                                        ?>
+                                        {{$i}} <input type="checkbox" name="tingkat[]" id="akses" value="{{$i}}"
+                                        @if($role)
+                                        checked 
+                                        @endif
+                                        >
+                                     <?php }?>   
+                                       @if($errors->has('tingkat'))
+                                        <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
                             <br><br>
                             <div class="form-group">
                                 <div class="row">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\matpel;
+use App\Models\role_matpel;
 use App\Http\Requests;
 use App\Http\Requests\matpelRequest;
 use Session;
@@ -19,12 +20,14 @@ class MatpelController extends Controller
         Session()->forget('add_siswa');
         $data['title'] = 'Mata Pelajaran';
         $data['menu'] = '';
+        $data['tingkat'] = role_matpel::all();
         $data['data'] = matpel::orderBy('nama_matpel', 'asc')->get();
         return view('matpel.index', $data);
 	}
 	public function sampah()
 	{
         $data['title'] = 'Mata Pelajaran';
+         $data['tingkat'] = role_matpel::all();
         $data['menu'] = 'sampah';
         $data['data'] = matpel::onlyTrashed()->orderBy('nama_matpel', 'asc')->get();
         return view('matpel.index', $data);
@@ -39,6 +42,13 @@ class MatpelController extends Controller
 	public function store(matpelRequest $request)
 	{
         $data = matpel::create($request->all());
+        $tingkat = $request['tingkat'];
+        foreach ($tingkat as $key) {
+        	$role = new role_matpel();
+        	$role->id_matpel = $data->id_matpel;
+        	$role->tingkat = $key;
+        	$role->save();
+        }
         if (Session::get('add_guru')) {
         	Session()->forget('add_guru');
         	return redirect()->route('guru.add');
@@ -51,6 +61,7 @@ class MatpelController extends Controller
 	{
 		$data['title'] = "Edit Matpel";
 		$data['data'] = matpel::where('id_matpel','=',$id)->get();
+        $data['role'] = role_matpel::where('id_matpel','=',$id)->get();
 		return view('matpel.edit',$data);
 	}
 
@@ -60,10 +71,28 @@ class MatpelController extends Controller
                     'kode_matpel' => 'required',
                     'nama_matpel' => 'required',
                     'kkm' => 'required',
+                    'tingkat' => 'required',
                   );
         $this->validate($request, $rules);
+        $tingkat = $request['tingkat'];
+		$hapus = role_matpel::where('id_matpel','=',$id)->delete();
+        foreach ($tingkat as $key) {
+			$cek = role_matpel::where('id_matpel','=',$id)->where('tingkat','=',$key)->first();
+			if ($cek) {
+
+			}
+			else{
+				$role = new role_matpel();
+	        	$role->id_matpel = $id;
+	        	$role->tingkat = $key;
+	        	$role->save();
+			}
+		}
+        	
+        
         $data = matpel::find($id);
         $data->update($request->all());
+
         return redirect('matpel');
 	}
 

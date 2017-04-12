@@ -31,6 +31,8 @@
                                     <td><?php echo $row->nama_guru ?></td>
                                     <td><?php echo $row->aktif == 'Y' ? 'Aktif' : 'Tidak Aktif' ?></td>
                                     <td style="text-align:center;width:15%;">
+                                        <a href="{{ route('jadwal.show', $row->id_kelas) }}" class="btn btn-xs btn-primary" title="lihat jadwal kelas {{ $row->tingkat."-".$row->nama_kelas }}">
+                                            <i class="glyphicon glyphicon-eye-open"></i></a>
                                         <a href="{{ URL::route('kelas.edit', $row->id_kelas) }}" class="btn btn-xs btn-primary" title="Edit">
                                         <i class="glyphicon glyphicon-edit"></i></a>
                                         <a href="{{ URL::route('kelas.delete', $row->id_kelas) }}" class="btn btn-xs btn-danger" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure ?">

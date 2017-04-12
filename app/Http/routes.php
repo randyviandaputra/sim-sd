@@ -44,8 +44,13 @@ Route::group(['middleware' => 'tools'],function(){
 			route::get('/tambah',['uses' => 'KelasController@add', 'as' => 'kelas.add']);
 			route::post('/tambah',['uses' => 'KelasController@store', 'as' => 'kelas.store']);
 			route::get('/edit/{id}',['uses' => 'KelasController@edit', 'as' => 'kelas.edit']);
+			route::get('/jadwal/{id}',['uses' => 'KelasController@jadwal', 'as' => 'jadwal.show']);
+			route::get('/tambah/jadwal/{id}',['uses' => 'KelasController@tambahJadwal', 'as' => 'jadwal.add']);
+			route::post('/tambah/jadwal/{id}',['uses' => 'KelasController@postJadwal', 'as' => 'jadwal.store']);
 			route::post('/edit/{id}',['uses' => 'KelasController@update', 'as' => 'kelas.update']);
+			route::get('/ajax/matpel-guru/{id}', ['uses' => 'KelasController@ajaxGuru','as' => 'matpel.guru.ajax']);
 			route::get('/delete/{id}',['uses' => 'KelasController@delete', 'as' => 'kelas.delete']);
+			route::get('/delete-jadwal/{id}',['uses' => 'KelasController@deleteJadwal', 'as' => 'jadwal.delete']);
 		});
 
 		route::group(['prefix' => 'siswa'], function(){
@@ -54,6 +59,7 @@ Route::group(['middleware' => 'tools'],function(){
 			route::post('/tambah',['uses' => 'SiswaController@store', 'as' => 'siswa.store']);
 			route::get('/edit/{id}',['uses' => 'SiswaController@edit', 'as' => 'siswa.edit']);
 			route::post('/edit/{id}',['uses' => 'SiswaController@update', 'as' => 'siswa.update']);
+			route::post('/naik',['uses' => 'SiswaController@kenaikan', 'as' => 'siswa.naik']);
 			route::get('/delete/{id}',['uses' => 'SiswaController@delete', 'as' => 'siswa.delete']);
 			route::get('/pdf',['uses' => 'SiswaController@pdf', 'as' => 'siswa.pdf']);
 			route::get('/restore/{id}',['uses' => 'SiswaController@restore', 'as' => 'siswa.restore']);

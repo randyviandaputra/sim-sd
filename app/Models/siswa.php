@@ -11,7 +11,7 @@ class siswa extends Model
 	protected $primaryKey = 'id_siswa';
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'no_induk_siswa','id_kelas','nama_siswa','tempat_lahir','tanggal_lahir','jenis_kelamin','golongan_darah','alamat','foto','hobi','telepon','agama',
+        'no_induk_siswa','id_kelas','nama_siswa','tempat_lahir','tanggal_lahir','jenis_kelamin','golongan_darah','alamat','foto','hobi','telepon','agama','angkatan_tahun',
     ];
     
     public function kelas()

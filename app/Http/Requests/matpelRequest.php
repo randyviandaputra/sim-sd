@@ -27,6 +27,7 @@ class matpelRequest extends Request
          'kode_matpel' => 'required',
          'nama_matpel' => 'required',
          'kkm' => 'required',
+         'tingkat' => 'required',
         ];
     }
      public function messages()
@@ -35,6 +36,7 @@ class matpelRequest extends Request
          'kode_matpel.required' => 'Kode matpel tidak boleh kosong', 
          'nama_matpel.required' => 'Nama matpel tidak boleh kosong',
          'kkm.required' => 'kkm tidak boleh kosong',
+         'tingkat.required' => 'tingkat tidak boleh kosong',
         ];
     }
 }

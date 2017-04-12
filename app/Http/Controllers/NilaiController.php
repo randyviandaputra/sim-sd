@@ -12,7 +12,7 @@ use App\Models\matpel;
 use App\Models\transaksi_nilai;
 use Auth, PDF, DB;
 use Illuminate\Support\Facades\Input;
-
+    
 use App\Http\Requests;
 
 class NilaiController extends Controller
@@ -33,7 +33,10 @@ class NilaiController extends Controller
             $query->where('siswas.nama_siswa','like','%'.Input::get('cari_nama').'%');
         }
         if (Input::has('cari_kelas')) {
-            $query->where('siswas.id_kelas','=',Input::get('cari_kelas'));
+            $query->where('transaksi_nilais.kelas','=',Input::get('cari_kelas'));
+        }  
+        if (Input::has('cari_angkatan')) {
+            $query->where('transaksi_nilais.angkatan','=',Input::get('cari_angkatan'));
         }        
         $data = $query->paginate(15);
         return view('nilai.index', compact('title', 'data','kelas'));
@@ -43,6 +46,7 @@ class NilaiController extends Controller
     {
     	$data['query']= Siswa::join('kelas','kelas.id_kelas','=','siswas.id_kelas')->where('siswas.id_siswa','=',$id)->first();
         $data['semester'] = $semester;
+        $data['status'] = "aktif";
     	$data['guru'] = Guru::find(Auth::user()->user_id);
     	$data['matpel'] = matpel::find($data['guru']->id_matpel);
         return view('nilai.create', $data)->withTitle('Input Nilai');
@@ -91,13 +95,41 @@ class NilaiController extends Controller
     public function show($id)
     {
         $data['title'] = 'Raport Siswa';
-        $siswa = siswa::where('id_siswa','=',$id)->first();
+        $siswa = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.id_siswa','=',$id)->first();
         $data['nilai'] = null;
         if (Input::has('semester')){
-            $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',input::get('semester'))->get();
+            $semester = input::get('semester');
+            if ($semester == 1 OR $semester == 2) {
+                $tingkat = 1;
+            }
+            elseif ($semester == 3 OR $semester == 4) {
+                $tingkat = 2;
+            }
+            elseif ($semester == 5 OR $semester == 6) {
+                $tingkat = 3;
+            }
+            elseif ($semester == 7 OR $semester == 8) {
+                $tingkat = 4;
+            }
+            elseif ($semester == 9 OR $semester == 10) {
+                $tingkat = 5;
+            }
+            elseif ($semester == 11 OR $semester == 12) {
+                $tingkat = 6;
+            }
+            if ($tingkat == $siswa->tingkat) {
+                $status = "aktif";
+            }
+            else{
+                $status = "tidak";
+            }
+            $data['status'] = $status;
+            $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.angkatan','=',$siswa->angkatan_tahun)->where('transaksi_nilais.status','=',$status)->get();
+            $data['tingkat'] = $tingkat;
+            $data['matpel'] = matpel::join('role_matpels','role_matpels.id_matpel','=','matpels.id_matpel')
+                            ->where('role_matpels.tingkat','=',$tingkat)->get();
         }
-        $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$siswa->no_induk_siswa)->first();
-        $data['matpel'] = matpel::all();
+            $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$siswa->no_induk_siswa)->first();
         return view('nilai.show', $data);
     }
 
@@ -107,12 +139,46 @@ class NilaiController extends Controller
         $data['status'] = $request->input('status');
         $data['title'] = 'Raport Siswa';
         $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$id)->first();
-        $data['all'] = siswa::all();
         $data['semester'] = $semester;
-        $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->where('transaksi_nilais.semester','=',$semester)->get();
-        $data['matpel'] = matpel::all();
-        $dia = DB::table('transaksi_nilais')->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.no_induk_siswa','=',$id)->where('siswas.id_kelas','=',$data['siswa']->id_kelas)->select(DB::raw('sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->first();
-        $semua = DB::table('transaksi_nilais')->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('siswas.id_kelas','=',$data['siswa']->id_kelas)->select(DB::raw('siswas.no_induk_siswa ,sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->groupBy('no_induk_siswa')->orderBy('total','DESC')->get();
+        if ($semester == 1 || $semester == 2) {
+            $tingkat = 1;
+        }
+        elseif ($semester == 3 || $semester == 4) {
+            $tingkat = 2;
+        }
+        elseif ($semester == 5 || $semester == 6) {
+            $tingkat = 3;
+        }
+        elseif ($semester == 7 || $semester == 8) {
+            $tingkat = 4;
+        }
+        elseif ($semester == 9 || $semester == 10) {
+            $tingkat = 5;
+        }
+        elseif ($semester == 11 || $semester == 12) {
+            $tingkat = 6;
+        }
+        $data['tingkat'] = $tingkat;
+        $data['matpel'] = matpel::join('role_matpels','role_matpels.id_matpel','=','matpels.id_matpel')
+                            ->where('role_matpels.tingkat','=',$tingkat)->get();
+        if ($tingkat == $data['siswa']->tingkat) {
+            $status = "aktif";
+            $data['all'] = siswa::where('id_kelas','=',$data['siswa']->id_kelas)->get();
+            $data['kelas'] = $data['siswa']->tingkat."-".$data['siswa']->nama_kelas;
+        }
+        else{
+            $status = "tidak";
+            $nilais = transaksi_nilai::where('semester','=',$semester)->where('angkatan','=',$data['siswa']->angkatan_tahun)->where('no_induk_siswa','=',$id)->where('status','=',$status)->first();
+            $data['all'] = transaksi_nilai::where('kelas','=',$nilais->kelas)->groupBy('no_induk_siswa')->where('status','=',$status)->get();
+            $data['kelas']=$nilais->kelas;
+        }
+
+        $data['status'] = $status;
+        $data['nilai'] = transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$id)->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.angkatan','=',$data['siswa']->angkatan_tahun)->where('transaksi_nilais.status','=',$status)->get();
+        $dia = DB::table('transaksi_nilais')->where('transaksi_nilais.status','=',$status)->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.no_induk_siswa','=',$id)->where('transaksi_nilais.kelas','=',$data['nilai'][0]->kelas)->select(DB::raw('sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->first();
+
+        $semua = DB::table('transaksi_nilais')->join('siswas','siswas.no_induk_siswa','=','transaksi_nilais.no_induk_siswa')->where('transaksi_nilais.semester','=',$semester)->where('transaksi_nilais.status','=',$status)->where('transaksi_nilais.kelas','=',$data['nilai'][0]->kelas)->select(DB::raw('siswas.no_induk_siswa ,sum(transaksi_nilais.nilai_tugas)+sum(transaksi_nilais.nilai_absensi)+sum(transaksi_nilais.nilai_uts)+sum(transaksi_nilais.nilai_uas) as total'))->groupBy('no_induk_siswa')->orderBy('total','DESC')->get();
+
         if ($dia->total == null) {
                 $data['ranking'] = 0;
         }

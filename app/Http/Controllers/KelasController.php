@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\kelas;
 use App\Models\Guru;
 use App\Http\Requests\kelasRequest;
+use App\Models\jadwal_kelas;
+use App\Models\Matpel;
+use App\Models\role_matpel;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
@@ -62,7 +65,7 @@ class KelasController extends Controller
             Session()->forget('add_siswa');
             return redirect()->route('siswa.add');
         }
-        return redirect('kelas');
+        return redirect()->route('jadwal.show', $data->id_kelas);
     }
 
     public function show($id)
@@ -93,6 +96,50 @@ class KelasController extends Controller
         $this->validate($request,$rules);
         $data = kelas::find($id)->update($request->all());
         return redirect('kelas');
+    }
+
+    public function jadwal($id)
+    {
+        $kelas = kelas::find($id);
+        $title = "Jadwal kelas : ".$kelas->tingkat."-".$kelas->nama_kelas;
+        $data =  jadwal_kelas::join('gurus','gurus.id_guru','=','jadwal_kelas.id_guru')
+                                        ->join('matpels','matpels.id_matpel','=','gurus.id_matpel')
+                                        ->where('jadwal_kelas.id_kelas','=',$id)->get();
+        $id = $kelas->id_kelas;
+        return  view('kelas.jadwal', compact('data','title','id'));
+    }
+
+    public function tambahJadwal($id)
+    {
+        $kelas = kelas::find($id);
+        $title = "Tambah Jadwal kelas : ".$kelas->tingkat."-".$kelas->nama_kelas;
+        $matpel = matpel::join('role_matpels','role_matpels.id_matpel','=','matpels.id_matpel')
+                        ->where('role_matpels.tingkat','=',$kelas->tingkat)->get();
+        return view('kelas.add_jadwal',compact('matpel','kelas','title'));
+    }
+
+    public function postJadwal(Request $request,$id)
+    {
+        $rules = array(
+            'hari' => 'required',
+            'id_guru' => 'required',
+            'mata_pelajaran' => 'required',
+        );
+        $this->validate($request,$rules);
+        $data = jadwal_kelas::create($request->all());
+         return redirect()->route('jadwal.show',$id);
+    }
+    public function deleteJadwal($id)
+    {
+        $jadwal = jadwal_kelas::find($id);
+        $id_kelas = $jadwal->id_kelas;
+        $jadwal->delete();
+        return redirect()->route('jadwal.show',$id_kelas);
+    }
+
+    public function ajaxGuru($id){
+        $guru = guru::where('id_matpel','=',$id)->lists("id_guru","nama_guru");
+        return json_encode($guru);
     }
 
     /**

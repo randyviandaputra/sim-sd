@@ -24,6 +24,10 @@ class GuruController extends Controller
      */
     public function index()
     {
+
+        Session()->forget('add_kelas');
+        Session()->forget('add_guru');
+        Session()->forget('add_siswa');
         $title = 'Guru';
         $menu = '';
         $matpel = matpel::all();

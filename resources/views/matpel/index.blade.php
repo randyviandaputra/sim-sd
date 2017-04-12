@@ -25,16 +25,24 @@
                                     <th>Kode Mata Pelajaran</th>
                                     <th>Nama Mata Pelajaran</th>
                                     <th>KKM</th>
+                                    <th>Untuk Tingkat</th>
                                     <th>&nbsp;</th>
                                 </thead>
                                 <tbody>
                                 <?php $i = 1; ?>
                                     @foreach($data as $row)
                                         <tr>
-                                            <td><?php echo $i++ ?></td>
-                                            <td><?php echo $row->kode_matpel ?></td>
-                                            <td><?php echo $row->nama_matpel ?></td>
-                                            <td><?php echo $row->kkm ?></td>
+                                            <td>{{$i++}}</td>
+                                            <td>{{$row->kode_matpel}}</td>
+                                            <td>{{$row->nama_matpel}}</td>
+                                            <td>{{$row->kkm}}</td>
+                                            <td>
+                                            @foreach($tingkat as $key)
+                                                @if($row->id_matpel == $key->id_matpel)
+                                                    {{$key->tingkat." "}}
+                                                @endif
+                                            @endforeach
+                                            </td>
                                             <td style="text-align:center;width:15%;">
                                                 @if ($menu == 'sampah')
                                                     <a href="{{ URL::route('matpel.restore', $row->id_matpel) }}" class="btn btn-xs btn-warning">

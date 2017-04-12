@@ -18,11 +18,11 @@
     </div>
 
 </div>
-
 <!-- Footer -->
     @include('includes.footer')
 
     <script src="/assets/jquery.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+@yield('javascript')
 </body>
 </html>

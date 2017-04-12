@@ -13,7 +13,8 @@
 						<div class="panel-body">
 
 							{!! Form::open(array('route' => 'nilai.store', 'class' => 'form-horizontal')) !!}
-
+							{!! Form::hidden('angkatan',  $query->angkatan_tahun) !!}
+							{!! Form::hidden('status',  $status) !!}
 			                @include('nilai._form')
 
 			                {!! Form::close() !!}

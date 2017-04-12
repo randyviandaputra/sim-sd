@@ -91,7 +91,6 @@
                                     <label class="col-md-3 control-label">Alamat </label>
                                      <div class="col-md-5">
                                         <textarea name="alamat" class="form-control"></textarea> 
-
                                        @if($errors->has('alamat'))
                                         <span class="help-block" style="color:red;">{{ $errors->first('alamat') }}</span>
                                         @endif

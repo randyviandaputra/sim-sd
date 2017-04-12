@@ -14,12 +14,15 @@ class transaksi_nilai extends Model
     protected $fillable = [
     	'id_guru',
         'no_induk_siswa',
+        'kelas',
         'nilai_tugas',
         'nilai_absensi',
         'nilai_uts',
         'nilai_uas',
         'nilai_rata_rata',
         'semester',
+        'angkatan',
+        'status',   
     ];
     public function siswa()
     {

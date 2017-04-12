@@ -1,9 +1,10 @@
 
 <div class="form-body">
-    Nama : {{ $query->nama_siswa }}&nbsp;&nbsp; Kelas : {{ $query->tingkat."".$query->nama_kelas }}
+    Nama : {{ $query->nama_siswa }}&nbsp;&nbsp; Kelas : {{ $query->tingkat."-".$query->nama_kelas }}
     <br>
     <div class="col-md-3">
     {!! Form::hidden('no_induk_siswa', $query->no_induk_siswa) !!}
+    {!! Form::hidden('kelas',  $query->tingkat."-".$query->nama_kelas) !!}
     {!! Form::hidden('id_guru', Auth::user()->user_id) !!}
     {!! Form::hidden('semester', $semester) !!}
     </div>

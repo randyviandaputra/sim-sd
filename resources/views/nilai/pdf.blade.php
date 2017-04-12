@@ -6882,7 +6882,7 @@ body{
                   <tr>
                       <td>Kelas&nbsp;</td>
                       <td>:&nbsp;</td>
-                      <td>{{ $siswa->tingkat."-".ucfirst($siswa->nama_kelas) }}</td>
+                      <td>{{ $kelas }}</td>
                   </tr>
                   <tr>
                       <td>Tempat dan tanggal Lahir&nbsp;</td>
@@ -6898,6 +6898,11 @@ body{
                       <td>Semester&nbsp;</td>
                       <td>:&nbsp;</td>
                       <td>{{ $semester }}</td>
+                  </tr>
+                  <tr>
+                      <td>Angkatan&nbsp;</td>
+                      <td>:&nbsp;</td>
+                      <td>{{ $siswa->angkatan_tahun }}</td>
                   </tr>
               </table>
               <br>
