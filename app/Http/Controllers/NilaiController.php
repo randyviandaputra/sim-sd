@@ -136,7 +136,7 @@ class NilaiController extends Controller
     public function pdf(Request $request,$id,$semester)
     {
         $data['catatan'] = $request->input('catatan');
-        $data['status'] = $request->input('status');
+        $data['hasil'] = $request->input('status');
         $data['title'] = 'Raport Siswa';
         $data['siswa'] = siswa::join("kelas",'kelas.id_kelas','=','siswas.id_kelas')->where('siswas.no_induk_siswa','=',$id)->first();
         $data['semester'] = $semester;

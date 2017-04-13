@@ -6997,7 +6997,7 @@ body{
         Keputusan :<br>
         Dengan memperhatikan hasil yang dicapai
         pada semester {{$semester}} maka siswa ditetapkan
-        @if($status == "naik")
+        @if($hasil == "naik")
         <i><u>Naik ke kelas {{$siswa->tingkat + 1}}</u></i>
       @else
         <i><u>Tinggal di kelas {{$siswa->tingkat}}</u></i>
