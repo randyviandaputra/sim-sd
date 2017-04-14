@@ -23,7 +23,9 @@
                     @include('siswa._searchAksesGuru')
                 @else
                     @if($semester == "GENAP")
-                     <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-send"></i> Kenaikan Kelas</a><br>
+                      @if($bulan == "06")
+                          <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-send"></i> Kenaikan Kelas</a><br>
+                       @endif
                      @endif
                      <div class="modal fade bd-example-modal-lg" id="show">
                       <div class="modal-dialog modal-lg" role="document">
