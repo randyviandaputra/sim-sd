@@ -277,6 +277,10 @@ class SiswaController extends Controller
                 $nilai->update(['status'=>'tidak']);
             }
             else{
+                $angkatan = siswa::where('no_induk_siswa','=',$nis[$i])->first();
+                $ganaek = $angkatan->angkatan_tahun + 1;
+                $siswa = siswa::where('no_induk_siswa','=',$nis[$i]);
+                $siswa->update(['angkatan_tahun'=> $ganaek]);
                 $nilai = transaksi_nilai::where('no_induk_siswa','=',$nis[$i]);
                 $nilai->update(['status'=>'tidak']);
             }
