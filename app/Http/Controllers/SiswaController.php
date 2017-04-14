@@ -49,6 +49,13 @@ class SiswaController extends Controller
             $query->where('id_kelas','=',Input::get('cari_kelas'));
         }
         $data['data'] = $query->orderBy('nama_siswa', 'asc')->paginate(15);
+        $bulan = date("m");
+        if ($bulan >= "07" AND $bulan <= "12") {
+            $data['semester'] = "GANJIL";
+        }
+        else{
+            $data['semester'] = "GENAP";
+        }
         return view('siswa.index', $data);
     }
     public function sampah()

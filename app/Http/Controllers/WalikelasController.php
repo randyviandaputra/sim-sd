@@ -22,6 +22,13 @@ class WalikelasController extends Controller
     	$data['title'] = "Wali Kelas : ".$data['kelas'][0]['tingkat']."-".$data['kelas'][0]['nama_kelas'];
     	$data['data'] = siswa::join('kelas','kelas.id_kelas','=','siswas.id_kelas')->where('siswas.id_kelas','=',$data['kelas'][0]['id_kelas'])->paginate(15);
         $data['kenaikan'] = kelas::where('tingkat','>',$data['kelas'][0]->tingkat)->get();
+		$bulan = date("m");
+        if ($bulan >= "07" AND $bulan <= "12") {
+            $data['semester'] = "GANJIL";
+        }
+        else{
+            $data['semester'] = "GENAP";
+        }
     	return view('siswa.index', $data);
     }
 }

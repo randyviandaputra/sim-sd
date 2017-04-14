@@ -6,6 +6,7 @@
     <div class="container">
         <div class="col-sm-12">
             <h3>{{ $title }}</h3>
+            <h4>Semester : {{ $semester }}</h4>
             @if (Auth::user()->level == 3)
             <a href="{{ route('siswa.add') }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
             @if ($menu == 'sampah')
@@ -21,8 +22,9 @@
                 @if($title == "Siswa")
                     @include('siswa._searchAksesGuru')
                 @else
+                    @if($semester == "GENAP")
                      <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-send"></i> Kenaikan Kelas</a><br>
-
+                     @endif
                      <div class="modal fade bd-example-modal-lg" id="show">
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content frm">
@@ -165,31 +167,36 @@
                                             <a href="{{ route('nilai.show', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="show">
                                             <i class="glyphicon glyphicon-eye-open"></i></a>
                                          @endif
-                                         @if($nilai1)
-                                            @if($nilai1->id_matpel == $guru->id_matpel)
-                                             <a href="{{ route('nilai.edit',array($nilai1->id_nilai, $ganjil)) }}" class="btn btn-xs btn-success" title="edit Semester {{$ganjil}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
-                                            @else
-                                             <a href="{{ route('nilai.add', array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
-                                            @endif
-                                        @else
-                                            <a href="{{ route('nilai.add',array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
-                                        @endif
 
-                                        @if($nilai2)
-                                            @if($nilai2->id_matpel == $guru->id_matpel)
-                                             <a href="{{ route('nilai.edit',array($nilai2->id_nilai, $genap)) }}" class="btn btn-xs btn-success" title="edit Semester {{$genap}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
-                                            @else
-                                             <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
-                                            @endif
-                                        @else
-                                            <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
-                                            <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
-                                        @endif
+                                         @if($title == "Siswa")
+                                               @if($nilai1)
+                                                  @if($nilai1->id_matpel == $guru->id_matpel)
+                                                     <a href="{{ route('nilai.edit',array($nilai1->id_nilai, $ganjil)) }}" class="btn btn-xs btn-success" title="edit Semester {{$ganjil}}">
+                                                    <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                                  @else
+                                                    <a href="{{ route('nilai.add', array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
+                                                    <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                                  @endif
+                                              @else
+                                                  <a href="{{ route('nilai.add',array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
+                                                  <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                              @endif
+
+                                              @if($semester == "GENAP") 
+                                                @if($nilai2)
+                                                    @if($nilai2->id_matpel == $guru->id_matpel)
+                                                      <a href="{{ route('nilai.edit',array($nilai2->id_nilai, $genap)) }}" class="btn btn-xs btn-success" title="edit Semester {{$genap}}">
+                                                      <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                    @else
+                                                       <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
+                                                      <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                    @endif
+                                                @else
+                                                    <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
+                                                    <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                @endif
+                                              @endif
+                                          @endif
 
                                     @endif
                                     </td>

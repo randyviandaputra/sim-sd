@@ -59,11 +59,7 @@ class GuruController extends Controller
         return view('guru.index', compact('title', 'data','matpel', 'menu'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function add()
     {
         $data['title'] = 'Tambah Guru';
