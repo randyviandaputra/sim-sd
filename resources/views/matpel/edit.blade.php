@@ -41,16 +41,27 @@
                             <div class="form-group">
                                     <label class="col-md-3 control-label">Untuk Tingkat :</label>
                                     <div class="col-md-3">
+                                    <div class="btn-group" data-toggle="buttons">
                                     <?php
                                         for ($i=1; $i < 7; $i++) {
                                             $role = App\Models\role_matpel::where('id_matpel','=',$data[0]->id_matpel)->where('tingkat','=',$i)->first();
                                         ?>
-                                        {{$i}} <input type="checkbox" name="tingkat[]" id="akses" value="{{$i}}"
+                                        <label 
+                                            @if($role)
+                                               class="btn btn-primary active"
+                                            @else
+                                               class="btn btn-primary"    
+                                            @endif
+                                        >
+                                                    <input type="checkbox" name="tingkat[]" id="akses" value="{{ $i }}"
                                         @if($role)
                                         checked 
                                         @endif
-                                        >
-                                     <?php }?>   
+                                                    >{{$i}}</input>
+                                        </label>  
+                                        
+                                     <?php }?> 
+                                     </div>  
                                        @if($errors->has('tingkat'))
                                         <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
                                         @endif

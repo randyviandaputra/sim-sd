@@ -49,14 +49,18 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Untuk Tingkat :</label>
                                     <div class="col-md-3">
-                                     <?php
-                                        for ($i=1; $i <= 6  ; $i++) {?>
-                                        {{$i}} <input type="checkbox" name="tingkat[]" id="akses" value="{{ $i }}">                                   
-                                    <?php }
-                                     ?>
-                                       @if($errors->has('tingkat'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
-                                        @endif
+                                         <div class="btn-group" data-toggle="buttons">
+                                             <?php
+                                                for ($i=1; $i <= 6  ; $i++) {?>
+                                                 <label class="btn btn-primary">
+                                                    <input type="checkbox" name="tingkat[]" id="akses" value="{{ $i }}">{{$i}}</input>
+                                                 </label>                                    
+                                                 <?php }
+                                                 ?>
+                                               @if($errors->has('tingkat'))
+                                                <span class="help-block" style="color:red;">{{ $errors->first('tingkat') }}</span>
+                                               @endif
+                                           </div>
                                     </div>
                                 </div>
                             </div>

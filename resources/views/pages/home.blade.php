@@ -2,22 +2,23 @@
 <html>
     <head>
         @include('includes.header')
+        <style type="text/css">
+            .navbar-inverse{
+            background-color: #003566;
+            border: none;
+            border-radius: 0px;
+            }
+        </style>
     </head>
 <body>
-<div class="container">
     <!-- Header -->
-    <header class="row">
         @include('includes.menu')
-    </header>
-    
     <!-- Content -->
     <div id="main" class="row">
         <div class="container">
             @yield('content')
         </div>
     </div>
-
-</div>
 <!-- Footer -->
     @include('includes.footer')
 

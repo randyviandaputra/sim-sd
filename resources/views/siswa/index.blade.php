@@ -1,7 +1,5 @@
 @extends('pages.home')
-
 @section('content')
-
 <div class="row">
     <div class="container">
         <div class="col-sm-12">
