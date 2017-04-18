@@ -110,9 +110,16 @@ class SiswaController extends Controller
         {
             $namafoto = "default.png";
         }
+        $bulan = date("m");
+        if ($bulan >= "05" AND $bulan <= "12") {
+            $termasuk = 0;
+        }
+        else{
+            $termasuk = 1;
+        }
         $kelas = kelas::find($request->input('id_kelas'));
         $kurang = $kelas->tingkat - 1;
-        $tahun = date('Y');
+        $tahun = date('Y')-$termasuk;
         $angkatan_tahun = $tahun - $kurang;
 
         $query = array(

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\kepalasekolah;
+use App\Models\datasekolah;
 
 use Auth;
 
@@ -21,7 +23,11 @@ class UserController extends Controller
     {
     	$this->validate($request, [
     		'username' => 'required|unique:users',
-    		'password' => 'required|min:4'
+    		'password' => 'required|min:4',
+            'nama' => 'required',
+            'daerah' => 'required',
+            'kepala'=>'required',
+            'nip' => 'required',
     	]);
 
     	$user = new User([
@@ -30,14 +36,20 @@ class UserController extends Controller
     		'user_id' => 0,
     		'level' => 3,
     	]);
-    	$login = new User([
-    		'username' => $request->input('username'),
-    		'password' =>  bcrypt($request->input('password')),
-    	]);
 
-        Auth::login($login);
-    	$user->save();
+        $sekolah = new datasekolah([
+            'nama_sekolah' => $request->input('nama'),
+            'daerah' =>  $request->input('daerah'),
+        ]);
 
+        $kepala = new kepalasekolah([
+            'nama_kepala' => $request->input('kepala'),
+            'no_induk' =>  $request->input('nip'),
+            'tahun' => date("Y"),
+        ]);
+        $user->save();
+        $sekolah->save();
+        $kepala->save();
     	return redirect()->route('dashboard');
     }
 }

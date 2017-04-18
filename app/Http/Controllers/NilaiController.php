@@ -10,6 +10,8 @@ use App\Models\siswa;
 use App\Models\User;
 use App\Models\matpel;
 use App\Models\transaksi_nilai;
+use App\Models\kepalasekolah;
+use App\Models\datasekolah;
 use Auth, PDF, DB;
 use Illuminate\Support\Facades\Input;
     
@@ -193,6 +195,8 @@ class NilaiController extends Controller
             }
         }
         $data['guru'] = guru::where('id_guru','=',Auth::user()->user_id)->first();
+        $data['sekolah'] = datasekolah::where('id',1)->first();
+        $data['kepala'] = kepalasekolah::where('id',1)->first();
         $pdf = PDF::loadView('Nilai.pdf', $data);
         return $pdf->stream('Laporan-Nilai-Siswa_'.$data['siswa']->nama_siswa.'.pdf');
     }

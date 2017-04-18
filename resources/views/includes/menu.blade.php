@@ -10,7 +10,11 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="">
-        SIM-SD
+        SD 
+         <?php 
+            $nama_sekolah =  App\Models\datasekolah::where('id',1)->first();
+        ?>
+        {{$nama_sekolah->nama_sekolah}}
       </a>
     </div>
 

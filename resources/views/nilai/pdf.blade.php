@@ -6873,36 +6873,31 @@ body{
 						<h3 class="text-center text-capitalize">{{ $title }}</h3>
 							<div class="panel-body">
               <br><br><br>
-								<table align="left">
+								<table class="table" align="left">
                   <tr>
-                      <td>Nama&nbsp;</td>
+                      <td><b>Nama Sekolah</b>&nbsp;</td>
                       <td>:&nbsp;</td>
-                      <td>{{ strtoupper($siswa->nama_siswa) }}</td>
-                  </tr>
-                  <tr>
-                      <td>Kelas&nbsp;</td>
+                      <td>{{ strtoupper($sekolah->nama_sekolah) }}</td>
+
+                      <td><b>Kelas</b>&nbsp;</td>
                       <td>:&nbsp;</td>
                       <td>{{ $kelas }}</td>
                   </tr>
-                  <tr>
-                      <td>Tempat dan tanggal Lahir&nbsp;</td>
+                   <tr>
+                      <td><b>Nama Siswa</b>&nbsp;</td>
                       <td>:&nbsp;</td>
-                      <td>{{ ucfirst($siswa->tempat_lahir) }},&nbsp; {{ date("d F Y",strtotime($siswa->tanggal_lahir)) }}</td>
-                  </tr>
-                  <tr>
-                      <td>Nomor Induk&nbsp;</td>
-                      <td>:&nbsp;</td>
-                      <td>{{ $siswa->no_induk_siswa }}</td>
-                  </tr>
-                  <tr>
-                      <td>Semester&nbsp;</td>
-                      <td>:&nbsp;</td>
-                      <td>{{ $semester }}</td>
-                  </tr>
-                  <tr>
-                      <td>Angkatan&nbsp;</td>
+                      <td>{{ strtoupper($siswa->nama_siswa) }}</td>
+                      <td><b>Angkatan</b>&nbsp;</td>
                       <td>:&nbsp;</td>
                       <td>{{ $siswa->angkatan_tahun }}</td>
+                  </tr>
+                  <tr>
+                      <td><b>Nomor Induk</b>&nbsp;</td>
+                      <td>:&nbsp;</td>
+                      <td>{{ $siswa->no_induk_siswa }}</td>
+                      <td><b>Semester</b>&nbsp;</td>
+                      <td>:&nbsp;</td>
+                      <td>{{ $semester }}</td>
                   </tr>
               </table>
               <br>
@@ -7006,12 +7001,23 @@ body{
       @endif
       </div>
         @endif
-        <p align="right" style="margin-right: 40px;">Tanggal : {{ date('d, F Y')}}</p><br>
+        <table align="right">
+          <tr>
+            <td>Diberikan di</td>
+            <td>&nbsp;:&nbsp;</td>
+            <td>{{ $sekolah->daerah }}</td>
+          </tr>
+          <tr>
+            <td>Tanggal</td>
+            <td>&nbsp;:&nbsp;</td>
+            <td>{{ date('d, F Y')}}</td>
+          </tr>
+        </table><br>
         <table align="center" style="width: 100%;">
           <tr>
               <td align="center">Orang Tua / Wali</td>
               <td align="center">Wali Kelas</td>
-              <td align="center">Mengetahui;<br>Kepala Sekolah</td>
+              <td align="center">Mengetahui;<br>Kepala Sekolah&nbsp;&nbsp;</td>
           </tr>
           <tr>
               <td style="height: 80px;">&nbsp;</td>
@@ -7021,7 +7027,7 @@ body{
           <tr>
               <td align="center">..............</td>
               <td align="center">{{ $guru->nama_guru }}<br> NIP.{{ $guru->no_induk_guru }}</td>
-              <td align="center">..............<br>NIP.</td>
+              <td align="center">{{ $kepala->nama_kepala }}<br> NIP.{{ $kepala->no_induk }}</td>
           </tr>
 
         </table>

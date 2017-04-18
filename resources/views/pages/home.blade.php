@@ -12,7 +12,9 @@
     </head>
 <body>
     <!-- Header -->
+     @if(Auth::check())
         @include('includes.menu')
+     @endif
     <!-- Content -->
     <div id="main" class="row">
         <div class="container">
