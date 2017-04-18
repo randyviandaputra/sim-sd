@@ -20,8 +20,9 @@
         </div>
     </div>
 <!-- Footer -->
+ @if(Auth::check())
     @include('includes.footer')
-
+@endif
     <script src="/assets/jquery.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
 @yield('javascript')

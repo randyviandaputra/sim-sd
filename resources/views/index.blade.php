@@ -1,32 +1,46 @@
 @extends('pages.home')
 
 @section('content')
-<div class="container">
-<br>
-<br>
-	<div class="col-md-4 col-md-offset-4" style="border: 1px solid grey;">
-		<form action="{{route('post.login')}}" method="post" autocomplete="off">
-			<h3 class="text-center text-capitalize text-inverse">Silahkan Login</h3>
-			@if (count($errors)>0)
-				<div class="alert alert-danger">
-					@foreach ($errors->all() as $error)
-						<p>{{$error}}</p>
-					@endforeach
+	<form action="{{route('post.login')}}" method="POST">
+			<br class="hidden-xs-down">
+			<br class="hidden-md-up hidden-xs-down">
+			<br class="hidden-md-up hidden-xs-down">
+			<div class="container modal-content" style="max-width:500px;">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="modal-header">
+						<h1 class="modal-title" id="myModalLabel">
+							<img class="" src="http://1.bp.blogspot.com/-Bh67v_o9ouY/VCAlZp1s-2I/AAAAAAAAAQk/MESy8z88hp4/s1600/Logo%2BSD%2B(sekolah%2Bdasar).png" style="width:90px;">
+						<strong style="font-size: 19px;">Sistem Informasi Sekolah Dasar</strong>
+						</h1>
+					</div>
+					<div class="modal-body">
+						<div class="form-group container col-md-12 col-sm-12 col-xs-12" style="margin:0; padding:0;">
+							<div class="col-md-2 col-sm-2 col-xs-2" style="margin:0; padding:0;">
+								<button class="form-control btn-primary" style="border-right:0px; background-color: #003566; border-color:#333;" disabled><span class="glyphicon glyphicon-user"></span></button>
+							</div>
+							<div class="col-md-10 col-sm-10 col-xs-10" style="margin:0; padding:0;">
+								<input type="text" name="username" class="form-control" placeholder="username">
+							</div>
+						</div>
+						<div class="form-group container col-md-12 col-sm-12 col-xs-12" style="margin:0; padding:0; margin-top:1px; margin-bottom:15px;">
+							<div class="col-md-2 col-sm-2 col-xs-2" style="margin:0; padding:0;">
+								<button class="form-control btn-primary" style="border-right:0px; background-color: #003566; border-color:#333;" disabled><span class="glyphicon glyphicon-barcode"></span></button>
+							</div>
+							<div class="col-md-10 col-sm-10 col-xs-10" style="margin:0; padding:0;">
+								<input type="password" name="password" class="form-control" placeholder="**********">
+							</div>
+						</div>
+						<div class="text-left col-md-8 col-sm-8 col-xs-8">
+						</div>
+						<button type="submit" class="btn btn-lg btn-default" style="background-color: #003566; color:#fff; width: 100%;">Login</button>
+					</div>
+					<div class="modal-footer col-md-12 col-sm-12 col-xs-12" style="margin-right:0; padding-right:0;">
+						<div class="col-md-12">
+							<p class="text-muted" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
+						</div>
+					</div>
 				</div>
-			@endif
-			<div class="form-group">
-				<input type="text" class="form-control" name="username" placeholder="Username">
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" name="password" placeholder="Password">
-			</div>
-			<div class="form-group">
-				<input type="submit" class="btn btn-block btn-primary text-capitalize form-control" value="login" />
 			</div>
 			{{ csrf_field() }}
 		</form>
-</div>
-</div>
-</div>
-	<br><br>
 @endsection()
