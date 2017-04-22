@@ -7,7 +7,7 @@
         <div class="col-sm-12 register">
             <h3>{{ $title }}</h3>
             @if (Auth::user()->level == 3)
-            <a href="{{ route('jadwal.add', $id) }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
+            <a href="{{ route('jadwal.add', $id) }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add</a>
             <br/><br/>
             @endif
             <br>
@@ -27,7 +27,7 @@
                                         @if($key->hari == 1)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         &nbsp;
@@ -42,7 +42,7 @@
                                         @if($key->hari == 2)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         @endif
@@ -56,7 +56,7 @@
                                         @if($key->hari == 3)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         @endif
@@ -70,7 +70,7 @@
                                         @if($key->hari == 4)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         @endif
@@ -84,7 +84,7 @@
                                         @if($key->hari == 5)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         @endif
@@ -98,7 +98,7 @@
                                         @if($key->hari == 6)
                                         {{$key->nama_matpel}}
                                             @if(Auth::user()->level == 3)
-                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></a>
+                                                <a href="{{ route('jadwal.delete',$key->id_jadwal) }}" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
                                             @endif
                                             ,&nbsp;
                                         @endif

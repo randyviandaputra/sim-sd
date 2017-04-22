@@ -165,7 +165,7 @@
                                         ?>
                                          @if($walikelas)       
                                             <a href="{{ route('nilai.show', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="show">
-                                            <i class="fa fa-eye-open"></i></a>
+                                            <i class="fa fa-eye"></i></a>
                                          @endif
 
                                          @if($title == "Siswa")

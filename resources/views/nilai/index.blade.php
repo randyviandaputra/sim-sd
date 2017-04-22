@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="container">
-    	<div class="col-sm-12">
+    	<div class="col-sm-12 register">
     		<h3>{{ $title }}</h3>
     		@include('layouts.partials.alert')
 			<div class="row">
@@ -13,7 +13,7 @@
 					<br>
 					<div class="panel panel-primary">
 						<div class="panel-body">
-							<table class="table table-hover" id="table">
+							<table class="table table-hover table-bordered" id="table">
 							  <thead>
 							  	<th>No.</th>
 							  	<th>NIS</th>
@@ -47,7 +47,7 @@
 							  		<td>{{ $row->angkatan }}</td>
 							  		<td style="text-align:center;width:15%;">
 					                    <a href="{{ URL::route('nilai.edit', array($row->id_nilai, $row->semester)) }}" class="btn btn-xs btn-primary" title="Edit">
-					 	                   <i class="glyphicon glyphicon-edit"></i></a>
+					 	                   <i class="fa fa-edit"></i></a>
 					                </td>
 							  	</tr>
 							  	@endforeach

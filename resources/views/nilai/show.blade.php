@@ -8,18 +8,18 @@
             <h2>    
             {{ $title }} 
             @if(Auth::user()->level == 1)
-            <a href="{{ route('siswa.index') }}" class="btn btn-success btn-sm pull-left" ><i class="glyphicon glyphicon-chevron-left"></i> back</a>
+            <a href="{{ route('siswa.index') }}" class="btn btn-success btn-sm pull-left" ><i class="fa fa-chevron-left"></i> back</a>
                 @if(count($_GET) >= 1)
                     @if($_GET['semester'] != "" AND count($matpel) >= 1 AND count($nilai) >= 1)
-                        <a href="" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-save-file"></i> Seve to PDF</a>
+                        <a href="" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#show"><i class="fa fa-save"></i> Save to PDF</a>
                     <div class="modal fade in" id="show">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content frm">
-                          <div class="modal-header" style="background-color: #003566 ; color: silver ;">
+                          <div class="modal-header content-bottom">
                             <button type="button" class="close" data-dismiss="modal">×</button>
                             <div class="modal-title display-4" s id="myModalLabel" align="center" style="vertical-align: middle;"><h1>Detail</h1></div>
                           </div>
-                          <div class="modal-body" style="margin:0; padding:0;">
+                          <div class="modal-body register" style="margin:0; padding:0;">
                             <div class="embed-responsive embed-responsive-4by3">
                             <br>
                             <br>
