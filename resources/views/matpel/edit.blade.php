@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
                         <form action="{{ route('matpel.update',$data[0]->id_matpel) }}" method="POST" class="form-horizontal">
                             <div class="form-body">

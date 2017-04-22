@@ -9,9 +9,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
-                        <form action="{{ route('kelas.update',$data->id_kelas) }}" method="POST">
+                        <form action="{{ route('kelas.update',$data->id_kelas) }}" method="POST" class="form-horizontal">
                             <div class="form-body">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Nama Kelas</label>

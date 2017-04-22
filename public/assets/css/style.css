@@ -8,15 +8,19 @@
 
 body{
     font-family: Tahoma;
+    color: white;
+    background-color: #ffffff;
+    text-shadow: 0 0 1px #000;
 }
 
 /* Menu */
 
 .navbar.navbar-custom {
     height: 70px;
-    background: #266080;
+    background: #2282C8;
     border-radius: 0;
     border: none;
+    width:100%;
     padding-top: 10px;
 }
 
@@ -45,48 +49,101 @@ body{
 
 .navbar-custom .collapse .navbar-nav .dropdown-menu {
     margin-top: 10px;
+    color: white;
+    background-color: #006699;
+    opacity: 1;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-image:none !important;
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a {
     color: #FFFFFF;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color:#266080;
+    background-color: #474C5E;
     color: #FFFFFF;
 
 }
 
 @media (max-width: 767px) {
-    .navbar-custom .navbar-collapse {
-        background: #266080;
+    .navbar-custom .navbar-custom {
+        background-color: #2282C8;
     }
 }
 
 /* Header */
 
 .header{
-    background-color: #B1D5ED;
+    background-color: #2282C8;
+}
+
+/* Register */
+
+.register {
+    background-color: #2282C8;
+}
+
+.register-heading {
+    color: #ffffff;
+    font-size: 22px;
+    text-shadow: 0 0 2px #000;
+}
+
+.register-footer {
+    color: #ffffff;
+    font-size: 16px;
+    text-shadow: 0 0 2px #000;
+}
+
+.register-button {
+    color: #ffffff;
+    background-color: #474C5E;
+    font-size: 20px;
+    border: none;
+    width: 100%;
+    border-radius: 0;
+    /*text-shadow: 0 0 2px #000; */
+}
+
+.form-control {
+    border-radius: 0;
+    opacity: .8;
+    border-color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.form-control:focus {
+    border: 2px solid #2282C8;
+
 }
 
 /* Content */
+#main {
+    margin: 10px;
+}
 .content-bottom{
-    background-color: #EAF2F9;
-    border-radius: 5px;
+    background-color: #474C5E;
+    border-radius: 0px;
+    height: auto;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .content-bottom h2{
-    background-color: #B1D5ED;
+    background-color: #2282C8;
     padding: 10px;
-    color: #333;
+    color: #fff;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 0px;
+}
+
+table {
+    color: #000;
+    text-shadow: 0 0 0px #fff;
 }
 
 /* Footer */
 
 .footer{
-    background-color: #266080;
+    background-color: #2282C8;
     padding-top: 20px;
     padding-bottom: 15px;
 }

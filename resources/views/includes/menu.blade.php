@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-custom">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse navbar-custom" id="bs-example-navbar-collapse-1">
        @if(Auth::check())
             <ul class="nav navbar-nav">
                     <li>

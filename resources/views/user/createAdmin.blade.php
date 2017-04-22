@@ -34,12 +34,12 @@
 			<br class="hidden-xs-down">
 			<br class="hidden-md-up hidden-xs-down">
 			<br class="hidden-md-up hidden-xs-down">
-			<div class="container modal-content" style="max-width:800px;">
+			<div class="container modal-content register" style="max-width:800px;">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="modal-header">
 						<h1 class="modal-title" id="myModalLabel">
-							<img class="" src="http://1.bp.blogspot.com/-Bh67v_o9ouY/VCAlZp1s-2I/AAAAAAAAAQk/MESy8z88hp4/s1600/Logo%2BSD%2B(sekolah%2Bdasar).png" style="width:90px;">
-						<strong style="font-size: 19px;">Data Sekolah</strong>
+							<img class="register-logo" src="http://1.bp.blogspot.com/-Bh67v_o9ouY/VCAlZp1s-2I/AAAAAAAAAQk/MESy8z88hp4/s1600/Logo%2BSD%2B(sekolah%2Bdasar).png" style="width:90px;">
+							<strong class="register-heading">Data Sekolah</strong>
 						</h1>
 					</div>
 					<div class="modal-body">
@@ -91,11 +91,11 @@
     						</div>
 						</div>
 
-						<button type="submit" class="btn btn-lg btn-default" style="background-color: #003566; color:#fff; width: 100%;">D&nbsp;A&nbsp;F&nbsp;T&nbsp;A&nbsp;R</button>
+						<button type="submit" class="btn btn-lg btn-default register-button">D&nbsp;A&nbsp;F&nbsp;T&nbsp;A&nbsp;R</button>
 					</div>
 					<div class="modal-footer col-md-12 col-sm-12 col-xs-12" style="margin-right:0; padding-right:0;">
 						<div class="col-md-12">
-							<p class="text-muted" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
+							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
 						</div>
 					</div>
 				</div>

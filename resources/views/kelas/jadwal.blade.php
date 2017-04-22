@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="container">
-        <div class="col-sm-12">
+        <div class="col-sm-12 register">
             <h3>{{ $title }}</h3>
             @if (Auth::user()->level == 3)
             <a href="{{ route('jadwal.add', $id) }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
@@ -12,7 +12,7 @@
             @endif
             <br>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 register">
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <table class="table table-hover table-bordered" id="table">

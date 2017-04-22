@@ -5,7 +5,7 @@
 			<br class="hidden-xs-down">
 			<br class="hidden-md-up hidden-xs-down">
 			<br class="hidden-md-up hidden-xs-down">
-			<div class="container modal-content" style="max-width:500px;">
+			<div class="container modal-content register" style="max-width:500px;">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="modal-header">
 						<h1 class="modal-title" id="myModalLabel">
@@ -16,7 +16,7 @@
 					<div class="modal-body">
 						<div class="form-group container col-md-12 col-sm-12 col-xs-12" style="margin:0; padding:0;">
 							<div class="col-md-2 col-sm-2 col-xs-2" style="margin:0; padding:0;">
-								<button class="form-control btn-primary" style="border-right:0px; background-color: #003566; border-color:#333;" disabled><span class="glyphicon glyphicon-user"></span></button>
+								<button class="form-control btn-primary" style="border-right:0px; background-color: #474C5E;" disabled><span class="fa fa-user-o"></span></button>
 							</div>
 							<div class="col-md-10 col-sm-10 col-xs-10" style="margin:0; padding:0;">
 								<input type="text" name="username" class="form-control" placeholder="username">
@@ -24,7 +24,7 @@
 						</div>
 						<div class="form-group container col-md-12 col-sm-12 col-xs-12" style="margin:0; padding:0; margin-top:1px; margin-bottom:15px;">
 							<div class="col-md-2 col-sm-2 col-xs-2" style="margin:0; padding:0;">
-								<button class="form-control btn-primary" style="border-right:0px; background-color: #003566; border-color:#333;" disabled><span class="glyphicon glyphicon-barcode"></span></button>
+								<button class="form-control btn-primary" style="border-right:0px; background-color: #474C5E;" disabled><span class="fa fa-key"></span></button>
 							</div>
 							<div class="col-md-10 col-sm-10 col-xs-10" style="margin:0; padding:0;">
 								<input type="password" name="password" class="form-control" placeholder="**********">
@@ -32,11 +32,11 @@
 						</div>
 						<div class="text-left col-md-8 col-sm-8 col-xs-8">
 						</div>
-						<button type="submit" class="btn btn-lg btn-default" style="background-color: #003566; color:#fff; width: 100%;">Login</button>
+						<button type="submit" class="btn btn-lg btn-default" style="background-color: #474C5E; color:#fff; width: 100%;">Login</button>
 					</div>
 					<div class="modal-footer col-md-12 col-sm-12 col-xs-12" style="margin-right:0; padding-right:0;">
 						<div class="col-md-12">
-							<p class="text-muted" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
+							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
 						</div>
 					</div>
 				</div>

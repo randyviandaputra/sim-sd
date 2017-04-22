@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
                         <span style="color:red;">{{ Session::get('add_siswa') }}</span>
                         <form action="{{ route('jadwal.store', $kelas->id_kelas) }}" method="POST" class="form-horizontal">

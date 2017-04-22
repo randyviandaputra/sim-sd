@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
                         <span style="color:red;">{{ Session::get('add_guru') }}</span>
                         <form action="{{ route('matpel.store') }}" method="POST" class="form-horizontal">
@@ -54,7 +54,7 @@
                                                 for ($i=1; $i <= 6  ; $i++) {?>
                                                  <label id="aktif{{$i}}" class="btn btn-default">
                                                     <input type="checkbox" name="tingkat[]" id="akses{{$i}}" value="{{ $i }}">{{$i}}</input>
-                                                 </label>                                    
+                                                 </label>
                                                  <?php }
                                                  ?>
                                                @if($errors->has('tingkat'))

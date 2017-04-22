@@ -2,15 +2,15 @@
 @section('content')
 <div class="row">
     <div class="container">
-        <div class="col-sm-12">
+        <div class="col-sm-12 register">
             <h3>{{ $title }}</h3>
             <h4>Semester : {{ $semester }}</h4>
             @if (Auth::user()->level == 3)
-            <a href="{{ route('siswa.add') }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
+            <a href="{{ route('siswa.add') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add</a>
             @if ($menu == 'sampah')
-                    <a href="{{ route('siswa.index') }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-trash"></i> Data Siswa</a>                <br/><br/>
+                    <a href="{{ route('siswa.index') }}" class="btn btn-primary btn-sm"><i class="fa fa-list"></i> Data Siswa</a>                <br/><br/>
                 @else
-                    <a href="{{ route('siswa.sampah') }}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-"></i> Sampah</a>                <br/><br/>
+                    <a href="{{ route('siswa.sampah') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Sampah</a>                <br/><br/>
                 @endif
             <br>
             @endif
@@ -22,7 +22,7 @@
                 @else
                     @if($semester == "GENAP")
                       @if($bulan == "06")
-                          <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><i class="glyphicon glyphicon-send"></i> Kenaikan Kelas</a><br>
+                          <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#show"><i class="fa fa-send"></i> Kenaikan Kelas</a><br>
                        @endif
                      @endif
                      <div class="modal fade bd-example-modal-lg" id="show">
@@ -39,8 +39,8 @@
                             <br>
                               <form method="POST" action="{{ route('siswa.naik') }}" accept-charset="UTF-8"  target="_parent">
                               <br>
-                              <div class="panel panel-default" style="margin-left:3px; margin-right: 3px; border-radius: 0px;">
-                               <div class="panel-body">
+                              <div class="panel panel-default register" style="margin-left:3px; margin-right: 3px; border-radius: 0px;">
+                               <div class="panel-body register">
                                  <select class="form-control" name="kelas" required="">
                                       <option value="">Naik ke kelas</option>
                                       @foreach($kenaikan as $key)
@@ -95,7 +95,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <table class="table table-hover" id="table">
+                            <table class="table table-hover table-bordered" id="table">
                               <thead>
                                 <th>No.Induk Siswa</th>
                                 <th>Nama Siswa</th>
@@ -118,12 +118,12 @@
                                     @if(Auth::user()->level == 3)
                                         @if ($menu == 'sampah')
                                             <a href="{{ URL::route('siswa.restore', $row->id_siswa) }}" class="btn btn-xs btn-warning" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure ?">
-                                        <i class="glyphicon glyphicon-repeat"></i></a>
+                                        <i class="fa fa-repeat"></i></a>
                                         @else
                                             <a href="{{ URL::route('siswa.edit', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="Edit">
-                                        <i class="glyphicon glyphicon-edit"></i></a>
+                                        <i class="fa fa-edit"></i>Edit</a>
                                         <a href="{{ URL::route('siswa.delete', $row->id_siswa) }}" class="btn btn-xs btn-danger" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure ?">
-                                        <i class="glyphicon glyphicon-trash"></i></a>
+                                        <i class="fa fa-trash"></i>Hapus</a>
                                         @endif
                                     @endif
                                     @if(Auth::user()->level == 1)
@@ -165,35 +165,35 @@
                                         ?>
                                          @if($walikelas)       
                                             <a href="{{ route('nilai.show', $row->id_siswa) }}" class="btn btn-xs btn-primary" title="show">
-                                            <i class="glyphicon glyphicon-eye-open"></i></a>
+                                            <i class="fa fa-eye-open"></i></a>
                                          @endif
 
                                          @if($title == "Siswa")
                                                @if($nilai1)
                                                   @if($nilai1->id_matpel == $guru->id_matpel)
                                                      <a href="{{ route('nilai.edit',array($nilai1->id_nilai, $ganjil)) }}" class="btn btn-xs btn-success" title="edit Semester {{$ganjil}}">
-                                                    <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                                    <i class="fa fa-pencil">{{$ganjil}}</i></a>
                                                   @else
                                                     <a href="{{ route('nilai.add', array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
-                                                    <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                                    <i class="fa fa-pencil">{{$ganjil}}</i></a>
                                                   @endif
                                               @else
                                                   <a href="{{ route('nilai.add',array($row->id_siswa, $ganjil)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$ganjil}}">
-                                                  <i class="glyphicon glyphicon-pencil">{{$ganjil}}</i></a>
+                                                  <i class="fa fa-pencil">{{$ganjil}}</i></a>
                                               @endif
 
                                               @if($semester == "GENAP") 
                                                 @if($nilai2)
                                                     @if($nilai2->id_matpel == $guru->id_matpel)
                                                       <a href="{{ route('nilai.edit',array($nilai2->id_nilai, $genap)) }}" class="btn btn-xs btn-success" title="edit Semester {{$genap}}">
-                                                      <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                      <i class="fa fa-pencil">{{$genap}}</i></a>
                                                     @else
                                                        <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
-                                                      <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                      <i class="fa fa-pencil">{{$genap}}</i></a>
                                                     @endif
                                                 @else
                                                     <a href="{{ route('nilai.add',array($row->id_siswa, $genap)) }}" class="btn btn-xs btn-primary" title="isi nilai Semester {{$genap}}">
-                                                    <i class="glyphicon glyphicon-pencil">{{$genap}}</i></a>
+                                                    <i class="fa fa-pencil">{{$genap}}</i></a>
                                                 @endif
                                               @endif
                                           @endif

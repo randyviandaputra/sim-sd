@@ -2,13 +2,6 @@
 <html>
     <head>
         @include('includes.header')
-        <style type="text/css">
-            .navbar-inverse{
-            background-color: #003566;
-            border: none;
-            border-radius: 0px;
-            }
-        </style>
     </head>
 <body>
     <!-- Header -->

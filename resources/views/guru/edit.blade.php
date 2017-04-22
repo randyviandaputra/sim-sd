@@ -9,9 +9,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
-                        <form action="{{ route('guru.update',$guru->id_guru) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('guru.update',$guru->id_guru) }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-body">
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">No Induk</label>

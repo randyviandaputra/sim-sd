@@ -4,14 +4,14 @@
 
 <div class="row">
     <div class="container">
-        <div class="col-sm-12">
+        <div class="col-sm-12 register">
             <h3>{{ $title }}</h3>
             @if (Auth::user()->level == 3)
-                <a href="{{ route('guru.add') }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i> Add</a>
+                <a href="{{ route('guru.add') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add</a>
                 @if ($menu == 'sampah')
-                    <a href="{{ route('guru.index') }}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-trash"></i> Data Guru</a>                <br/><br/>
+                    <a href="{{ route('guru.index') }}" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i> Data Guru</a>                <br/><br/>
                 @else
-                    <a href="{{ route('guru.sampah') }}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i> Sampah</a>                <br/><br/>
+                    <a href="{{ route('guru.sampah') }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Sampah</a>                <br/><br/>
                 @endif
 
             @endif
@@ -19,10 +19,10 @@
             @include('Guru._search')
             <br>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 register">
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <table class="table table-hover" id="table">
+                            <table class="table table-hover table-bordered" id="table">
                               <thead>
                                 <th>No.Induk Guru</th>
                                 <th>Nama Guru</th>
@@ -43,12 +43,12 @@
                                     <td style="text-align:center;width:15%;">
                                         @if ($menu == 'sampah')
                                             <a href="{{ URL::route('guru.restore', $row->id_guru) }}" class="btn btn-xs btn-warning" data-confirm="Are you sure ?">
-                                        <i class="glyphicon glyphicon-repeat"></i></a>
+                                        <i class="fa fa-repeat"></i></a>
                                         @else
                                             <a href="{{ URL::route('guru.edit', $row->id_guru) }}" class="btn btn-xs btn-primary" title="Edit">
-                                        <i class="glyphicon glyphicon-edit"></i></a>
+                                        <i class="fa fa-edit"></i> Edit</a>
                                         <a href="{{ URL::route('guru.delete', $row->id_guru) }}" class="btn btn-xs btn-danger" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure ?">
-                                        <i class="glyphicon glyphicon-trash"></i></a>
+                                        <i class="fa fa-trash"></i> Hapus</a>
                                         @endif
                                     </td>
                                 </tr>

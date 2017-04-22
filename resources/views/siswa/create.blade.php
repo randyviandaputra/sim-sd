@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         <div class="form-body">
                         <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
                             <br>
