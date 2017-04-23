@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         {!! Form::open(array('route' => 'guru.store', 'class' => 'form-horizontal')) !!}
                                @include('guru._form')
 

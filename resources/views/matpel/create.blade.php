@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         {!! Form::open(array('route' => 'matpel.store', 'class' => 'form-horizontal')) !!}
                                @include('matpel._form')
 
@@ -30,7 +30,6 @@
                                            </div>
                                     </div>
                                 </div>
-                            </div>
                             <br><br>
                             <div class="form-group">
                                 <div class="row">
@@ -38,6 +37,7 @@
                                         <button class="btn btn-success">Simpan</button>
                                     </div>
                                 </div>
+                            </div>
                             </div>
                             {{ csrf_field() }}
                         {!! Form::close() !!}

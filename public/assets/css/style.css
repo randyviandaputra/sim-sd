@@ -152,3 +152,17 @@ table {
     color: #ffffff;
     font-size: 15px;
 }
+
+/* PopOver */
+.popover-title{
+    background:  #FC2036;
+}
+.popover-header{ 
+    background:  #FC2036; 
+} 
+.popover-content{
+ background:  #FC2036;
+ /*border-radius: 0;*/
+ color:white; 
+ border-collapse: collapse;
+}
