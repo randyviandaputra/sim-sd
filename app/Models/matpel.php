@@ -16,4 +16,9 @@ class matpel extends Model
         'nama_matpel',
         'kkm',
     ];
+    public static function drop_options()
+    {
+        $query = array('' => 'Pilih Mata Pelajaran') + self::pluck('nama_matpel', 'id_matpel')->toArray();
+        return $query;
+    }
 }

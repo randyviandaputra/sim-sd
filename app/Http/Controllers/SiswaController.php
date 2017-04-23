@@ -9,6 +9,7 @@ use App\Models\Guru;
 use App\Models\siswa;
 use App\Models\User;
 use App\Models\matpel;
+use App\Helpers\Helper;
 use App\Models\jadwal_kelas;
 use App\Models\transaksi_nilai;
 use Illuminate\Support\Facades\Input;
@@ -39,16 +40,28 @@ class SiswaController extends Controller
                $query = siswa::with('kelas')->where('id_kelas','=',0)->orderBy('nama_siswa', 'asc');
             }
             else{
-                $query = siswa::with('kelas')->where('id_kelas','=',$data['kelasGuru'][0]->id_kelas)->orderBy('nama_siswa', 'asc');
+                $query = null;
             }
+        }
+        if (Input::has('cari_kelas')) {
+            $query = siswa::with('kelas')->orderBy('nama_siswa', 'asc');
+            $query->where('id_kelas','=',Input::get('cari_kelas'));
         }
         if (Input::has('cari_nama')) {
             $query->where('nama_siswa','like','%'.Input::get('cari_nama').'%');
         }
-        if (Input::has('cari_kelas')) {
-            $query->where('id_kelas','=',Input::get('cari_kelas'));
+        if (Auth::user()->level == 1) {
+            if (Input::has('cari_kelas')) {
+                $data['data'] = $query->orderBy('nama_siswa', 'asc')->paginate(15);
+            }
+            else{
+                $data['data'] = siswa::where('id_kelas','=',0)->paginate(15);
+            }
         }
-        $data['data'] = $query->orderBy('nama_siswa', 'asc')->paginate(15);
+        else{
+            
+            $data['data'] = $query->orderBy('nama_siswa', 'asc')->paginate(15);
+        }
         $bulan = date("m");
         if ($bulan >= "07" AND $bulan <= "12") {
             $data['semester'] = "GANJIL";
@@ -79,8 +92,13 @@ class SiswaController extends Controller
     public function add()
     {
         $data['title'] = 'Tambah Siswa';
-        $data['kelas'] = kelas::orderBy('nama_kelas', 'asc')->get();
-        if (count($data['kelas']) == 0) {
+
+        $data['kelas'] = kelas::drop_options();
+        $data['jenis_kelamin'] = Helper::jenis_kelamin();
+        $data['golongan_darah'] = Helper::golongan_darah();
+        $data['agama'] = Helper::agama();
+        $data['kelass'] = kelas::orderBy('nama_kelas', 'asc')->get();
+        if (count($data['kelass']) == 0) {
             Session::put('add_siswa', 'Tambah Kelas Terlebih dahulu');
             return redirect()->route('kelas.add');
         }
@@ -191,8 +209,11 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Siswa';
-        $data['kelas'] = kelas::orderBy('nama_kelas', 'asc')->get();
-        $data['data'] = siswa::where('id_siswa','=',$id)->join('kelas','kelas.id_kelas','=','siswas.id_kelas')->first();
+        $data['kelas'] = kelas::drop_options();
+        $data['jenis_kelamin'] = Helper::jenis_kelamin();
+        $data['golongan_darah'] = Helper::golongan_darah();
+        $data['agama'] = Helper::agama();
+        $data['query'] = siswa::where('id_siswa','=',$id)->join('kelas','kelas.id_kelas','=','siswas.id_kelas')->first();
         return view('siswa.edit', $data);
     }
 

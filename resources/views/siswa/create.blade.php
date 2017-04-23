@@ -9,183 +9,56 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body register">
-                        <div class="form-body">
-                        <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                            <br>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Kelas</label>
-                                    <div class="col-md-3">
-                                      <select class="form-control" name="id_kelas">
-                                          <option value="">Pilih Kelas</option>
-                                          @foreach($kelas as $key)
-                                          <option value="{{ $key['id_kelas']}}">{{ $key['tingkat']."-".$key['nama_kelas'] }}</option>
-                                          @endforeach
-                                      </select>
+                        <div class="panel-body">
+                        {!! Form::open(array('route' => 'siswa.store', 'class' => 'form-horizontal')) !!}
+                               @include('siswa._form')
 
-                                       @if($errors->has('id_kelas'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('id_kelas') }}</span>
-                                        @endif
+
+                              @if($errors->has('username'))
+                                      <div class="form-group has-error has-feedback">
+                                       {!! Form::label('', 'Username', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+                                  @else
+                                      <div class="form-group">
+                                      {!! Form::label('', 'Username', array('class' => 'col-md-3 control-label')) !!}
+                                  @endif
+                                  <div class="col-md-3">
+                                      @if($errors->has('username'))
+                                      {!! Form::text('username', null, array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('username'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+                                       <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                       <span id="inputError2Status" class="sr-only">(error)</span>
+                                      @else
+                                           {!! Form::text('username', null, array('class' => 'form-control')) !!}
+                                      @endif
+                                  </div>
+                              </div>
+                              @if($errors->has('password'))
+                                      <div class="form-group has-error has-feedback">
+                                       {!! Form::label('', 'Password', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+                                  @else
+                                      <div class="form-group">
+                                      {!! Form::label('', 'Password', array('class' => 'col-md-3 control-label')) !!}
+                                  @endif
+                                  <div class="col-md-3">
+                                      @if($errors->has('password'))
+                                      {!! Form::password('password', array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('password'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+                                       <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                       <span id="inputError2Status" class="sr-only">(error)</span>
+                                      @else
+                                           {!! Form::password('password', array('class' => 'form-control')) !!}
+                                      @endif
+                                  </div>
+                              </div>
+
+
+                               <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            {!! Form::submit('Simpan', array('class' => 'btn btn-success')) !!}
+                                            <a href="{{ URL::route('matpel.index') }}" class="btn btn-primary">Kembali</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Nama </label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="nama_siswa" class="form-control">
-
-                                       @if($errors->has('nama_siswa'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('nama_siswa') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Tempat Lahir</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="tempat_lahir" class="form-control">
-
-                                       @if($errors->has('tempat_lahir'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('tempat_lahir') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Tanggal Lahir </label>
-                                    <div class="col-md-3">
-                                       <input type="date" name="tanggal_lahir" class="form-control">
-
-                                       @if($errors->has('tanggal_lahir'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('tanggal_lahir') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Jenis Kelamin </label>
-                                    <div class="col-md-3">
-                                      <select class="form-control" name="jenis_kelamin">
-                                        <option value="">Jenis Kelamin</option>
-                                        <option>Laki - Laki</option>
-                                        <option>Perempuan</option>
-                                    </select>
-
-                                       @if($errors->has('jenis_kelamin'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('jenis_kelamin') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">golongan darah</label>
-                                    <div class="col-md-3">
-                                        <select name="golongan_darah" class="form-control">
-                                            <option value="">Pilih Golongan Darah</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="O">O</option>
-                                            <option value="AB">AB</option>
-                                        </select>
-
-                                       @if($errors->has('golongan_darah'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('golongan_darah') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Alamat </label>
-                                     <div class="col-md-3">
-                                        <textarea name="alamat" class="form-control"></textarea> 
-
-                                       @if($errors->has('alamat'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('alamat') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Hobi </label>
-                                     <div class="col-md-3">
-                                        <textarea name="hobi" class="form-control"></textarea> 
-
-                                       @if($errors->has('hobi'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('hobi') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Foto</label>
-                                     <div class="col-md-3">
-                                        <input type="file" class="form-control" name="foto">
-
-                                       @if($errors->has('foto'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('foto') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Telepon </label>
-                                    <div class="col-md-3">
-                                        <input type="text" name="telepon" class="form-control">
-
-                                       @if($errors->has('telepon'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('telepon') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Agama</label>
-                                    <div class="col-md-3">
-                                      <select class="form-control" name="agama">
-                                      <option value="">Agama</option>
-                                      @php
-                                          $agama = array('Islam','Kristen','Hindu','Hindu','Protestan');
-                                      @endphp
-                                        @for ($i = 0; $i < count($agama) ; $i++)
-                                            <option value="{{$agama[$i]}}">{{$agama[$i]}}</option>
-                                        @endfor
-                                    </select>
-
-                                       @if($errors->has('agama'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('agama') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Username </label>
-                                <div class="col-md-3">
-                                    <input type="text" name="username" class="form-control">
-
-                                       @if($errors->has('username'))
-                                        <span class="help-block" style="color:red;">{{ $errors->first('username') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Password </label>
-                                <div class="col-md-3">
-                                    <input type="password" name="password" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button class="btn btn-success">Simpan</button>
-                                    </div>
-                                </div>
-                            </div>
-                            {{ csrf_field() }}
-
-                        </form>
-                        </div>
+                        {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -195,5 +68,28 @@
 </div>
 
 @endsection()
+@section('javascript')
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+        format: 'yyyy-mm-dd'
+    });
+  });
+  </script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+  
+      $( function()
+      {
+        $('[data-toggle="popover"]').popover()
+      }
+      );
+})
+</script>
+@endsection
 
 

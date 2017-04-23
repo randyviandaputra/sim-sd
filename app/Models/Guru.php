@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Matpel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Guru extends Model
@@ -27,5 +28,11 @@ class Guru extends Model
     public function matpel()
     {
         return $this->belongsTo('\App\Models\Matpel', 'id_matpel', 'id_matpel');
+    }
+
+    public static function drop_options()
+    {
+        $query = array('' => 'Pilih Guru') + self::pluck('nama_guru', 'id_guru')->toArray();
+        return $query;
     }
 }

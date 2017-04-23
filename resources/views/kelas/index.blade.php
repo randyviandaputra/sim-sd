@@ -18,7 +18,7 @@
                         <div class="panel-body">
                             <table class="table table-hover table-bordered" id="table">
                               <thead>
-                                <th>Nama Kelas</th>
+                                <th>Tingkat/Nama Kelas</th>
                                 <th>Wali Kelas</th>
                                 <th>Status</th>
                                 <th>&nbsp;</th>

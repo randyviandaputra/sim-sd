@@ -137,7 +137,7 @@
                                         @if(count($_GET) >= 1)
                                           @if(count($nilai) >= 1 )
                                             <tr>
-                                                <td>Kelas&nbsp;</td>
+                                                <td>Tingkat/Kelas&nbsp;</td>
                                                 <td>:&nbsp;</td>
                                                 <td>{{ $nilai[0]->kelas }}</td>
                                             </tr>
@@ -177,7 +177,7 @@
                                             <td align="center">{{ $row->kkm }}</td>
                                           <?php
                                               if ($_GET['semester']){
-                                                  $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$_GET['semester'])->where('gurus.id_matpel','=',$row->id_matpel)->where('transaksi_nilais.status','=',$status)->first();
+                                                  $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$_GET['semester'])->where('gurus.id_matpel','=',$row->id_matpel)->where('transaksi_nilais.angkatan','=',$siswa->angkatan_tahun)->where('transaksi_nilais.status','=',$status)->first();
                                               }
                                           ?>
                                           @if($cek)
@@ -212,6 +212,7 @@
                                         $tugas = 0;
                                         $absen = 0;
                                         $uts = 0;
+                                        $rata=0;
                                         $uas = 0;
                                         if(count($matpel) >= 1){ 
                                           foreach ($nilai as $key) {
@@ -219,6 +220,7 @@
                                               $absen += $key['nilai_absensi'];
                                               $uts += $key['nilai_uts'];
                                               $uas += $key['nilai_uas']; 
+                                              $rata += $key['nilai_rata_rata'];
                                           }
                                         }
                                         ?>
@@ -226,7 +228,7 @@
                                         <td align="center">{{ $absen }}</td>
                                         <td align="center">{{ $uts }}</td>
                                         <td align="center">{{ $uas }}</td>
-                                        <td align="center">-</td>
+                                        <td align="center">{{$rata}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center"><b>Rata Rata</b></td>
@@ -238,6 +240,7 @@
                                             $rabsen= $absen/$jumlah;
                                             $ruts= $uts/$jumlah;
                                             $ruas= $uas/$jumlah;
+                                            $rrata = $rata/$jumlah;
                                           }
                                           else{
 
@@ -245,13 +248,14 @@
                                             $rabsen= 0;
                                             $ruts= 0;
                                             $ruas= 0;
+                                            $rrata=0;
                                           }
                                         ?>
                                             <td align="center">{{substr($rtugas, 0, 5)}}</td>
                                             <td align="center">{{ substr($rabsen,0, 5) }}</td>
                                             <td align="center">{{ substr($ruts,0, 5) }}</td>
                                             <td align="center">{{ substr($ruas,0, 5) }}</td>
-                                            <td align="center">-</td>
+                                            <td align="center">{{ substr($rrata,0, 5) }}</td>
                                     </tr>
                                 </table>
                                 @endif
@@ -264,5 +268,4 @@
         </div>
     </div>
 </div>
-
 @endsection()

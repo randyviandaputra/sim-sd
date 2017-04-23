@@ -21,5 +21,9 @@ class kelas extends Model
     {
         return $this->hasMany('\App\Models\Siswa', 'id_kelas', 'id_kelas');
     }
-
+  public static function drop_options()
+    {
+        $query = array('' => 'Pilih Kelas') + self::pluck('nama_kelas', 'id_kelas')->toArray();
+        return $query;
+    }
 }

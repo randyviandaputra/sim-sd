@@ -6877,9 +6877,9 @@ body{
                   <tr>
                       <td><b>Nama Sekolah</b>&nbsp;</td>
                       <td>:&nbsp;</td>
-                      <td>{{ strtoupper($sekolah->nama_sekolah) }}</td>
+                      <td>SD {{ strtoupper($sekolah->nama_sekolah) }}</td>
 
-                      <td><b>Kelas</b>&nbsp;</td>
+                      <td><b>Tingkat / Kelas</b>&nbsp;</td>
                       <td>:&nbsp;</td>
                       <td>{{ $kelas }}</td>
                   </tr>
@@ -6922,7 +6922,7 @@ body{
                   <td align="center">{{ $row->kkm }}</td>
                    <?php
                       if ($semester){
-                          $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.semester','=',$semester)->where('gurus.id_matpel','=',$row->id_matpel)->first();
+                          $cek = App\Models\transaksi_nilai::join('gurus','gurus.id_guru','=','transaksi_nilais.id_guru')->where('transaksi_nilais.no_induk_siswa','=',$siswa->no_induk_siswa)->where('transaksi_nilais.angkatan','=',$siswa->angkatan_tahun)->where('transaksi_nilais.semester','=',$semester)->where('gurus.id_matpel','=',$row->id_matpel)->first();
                       }
                   ?>
                   @if($cek)
@@ -6945,6 +6945,7 @@ body{
                   <?php 
                   $tugas = 0;
                   $absen = 0;
+                  $rata=0;
                   $uts = 0;
                   $uas = 0;
                   foreach ($nilai as $key) {
@@ -6952,13 +6953,13 @@ body{
                       $absen += $key['nilai_absensi'];
                       $uts += $key['nilai_uts'];
                       $uas += $key['nilai_uas']; 
-                  }
+                      $rata += $key['nilai_rata_rata'];                  }
                   ?>
                   <td align="center">{{ $tugas }}</td>
                   <td align="center">{{ $absen }}</td>
                   <td align="center">{{ $uts }}</td>
                   <td align="center">{{ $uas }}</td>
-                  <td align="center">-</td>
+                  <td align="center">{{ $rata }}</td>
               </tr>
               <tr>
                   <td colspan="2" align="center"><b>Rata Rata</b></td>
@@ -6969,12 +6970,13 @@ body{
                       $rabsen= $absen/$jumlah;
                       $ruts= $uts/$jumlah;
                       $ruas= $uas/$jumlah;
+                      $rrata = $rata/$jumlah;
                   ?>
                    <td align="center">{{substr($rtugas, 0, 5)}}</td>
                     <td align="center">{{ substr($rabsen,0, 5) }}</td>
                     <td align="center">{{ substr($ruts,0, 5) }}</td>
                     <td align="center">{{ substr($ruas,0, 5) }}</td>
-                    <td align="center">-</td>
+                    <td align="center">{{ substr($rrata,0, 5) }}</td>
               </tr>
               <tr>
                 <td colspan="7" align="center">Peringkat kelas ke <i>@php echo $ranking == 0 ? ''.count($all).'' : ''.$ranking.'' @endphp</i> dari <i>{{ count($all) }}</i> Siswa</td>

@@ -6,13 +6,12 @@
     <div class="container">
     	<div class="col-sm-12 content-bottom">
     		<h2>{{ $title }}</h2>
-			@include('layouts.partials.validation')
 			<div class="row">
   				<div class="col-md-12">
 					<div class="panel panel-primary">
 						<div class="panel-body">
 
-							{!! Form::model($query, array('route' => ['nilai.update', 'id' => $query->id_nilai], 
+							{!! Form::model($query, array('route' => ['nilai.update', 'id' => $data[0]->id_matpel], 
 								'class' => 'form-horizontal')) !!}
 
 			                @include('nilai._form')
@@ -28,5 +27,17 @@
 </div>
 
 @endsection()
+@section('javascript')
+ <script type="text/javascript">
+
+      $( function()
+      {
+        $('[data-toggle="popover"]').popover()
+      }
+      );
+   </script>
+@endsection
+
+
 
 

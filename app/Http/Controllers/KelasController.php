@@ -10,6 +10,7 @@ use App\Http\Requests\kelasRequest;
 use App\Models\jadwal_kelas;
 use App\Models\Matpel;
 use App\Models\role_matpel;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
@@ -49,13 +50,16 @@ class KelasController extends Controller
      */
     public function add()
     {
-        $title = "Tambah Kelas";
-        $guru = Guru::all();
+        $data['title'] = "Tambah Kelas";
+        $data['guru'] = guru::drop_options();
+        $guru = guru::orderBy('nama_guru', 'asc')->get();
+        $data['tingkat'] = Helper::tingkat();
+        $data['status'] = Helper::status();
         if (count($guru) == 0) {
             Session::put('add_kelas','Tambah Guru terlebih dahulu');
             return redirect()->route('guru.add');
         }
-        return view('kelas.create',compact('title','guru'));
+        return view('kelas.create',$data);
     }
 
     public function store(kelasRequest $request)
@@ -73,18 +77,15 @@ class KelasController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        $title = "Edit Kelas";
-        $guru = Guru::all();
-        $data = kelas::find($id);
-        return view('kelas.edit',compact('data','title','guru'));
+        $data['title'] = "Edit Kelas";
+        $data['guru'] = guru::drop_options();
+        $data['tingkat'] = Helper::tingkat();
+        $data['status'] = Helper::status();
+        $data['query'] = kelas::find($id);
+        return view('kelas.edit', $data);
     }
 
     public function update(Request $request, $id)
@@ -100,8 +101,8 @@ class KelasController extends Controller
 
     public function jadwal($id)
     {
-        $kelas = kelas::find($id);
-        $title = "Jadwal kelas : ".$kelas->tingkat."-".$kelas->nama_kelas;
+        $kelas = kelas::join('gurus','gurus.id_guru','=','kelas.id_guru')->where('kelas.id_kelas','=',$id)->first();
+        $title = "Jadwal kelas : ".$kelas->tingkat."-".$kelas->nama_kelas." (".$kelas->nama_guru.")";
         $data =  jadwal_kelas::join('gurus','gurus.id_guru','=','jadwal_kelas.id_guru')
                                         ->join('matpels','matpels.id_matpel','=','gurus.id_matpel')
                                         ->where('jadwal_kelas.id_kelas','=',$id)->get();

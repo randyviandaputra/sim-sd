@@ -9,68 +9,20 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body register">
-                        <div class="form-body">
-                        <form action="{{ route('kelas.update',$data->id_kelas) }}" method="POST" class="form-horizontal">
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Nama Kelas</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="nama_kelas" class="form-control" value="{{ $data->nama_kelas }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Wali Kelas</label>
-                                    <div class="col-md-3">
-                                       <select name="id_guru" class="form-control">
-                                           <option value="">Pilih Wali Kelas</option>
-                                           @foreach($guru as $key)
-                                           <option value="{{ $key->id_guru }}"
-                                           @if($data->id_guru == $key->id_guru)
-                                           selected
-                                           @endif
-                                           >{{ $key->nama_guru }}</option>
-                                           @endforeach
-                                       </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Status</label>
-                                    <div class="col-md-3">
-                                       <select name="aktif" class="form-control">
-                                           <option value="">Status</option>
-                                           <option value="Y"
-                                           @if($data->aktif == "Y")
-                                           selected
-                                           @endif
-                                           >Aktif</option>
-                                           <option value="N"
-                                           @if($data->aktif == "N")
-                                           selected
-                                           @endif
-                                           >Tidak Aktif</option>
-                                       </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br><br>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button class="btn btn-success">Simpan</button>
-                                    </div>
-                                </div>
-                            </div>
-                            {{ csrf_field() }}
+                        <div class="panel-body">
+                        {!! Form::model($query, array('route' => ['kelas.update', 'id' => $query->id_kelas], 
+                                'class' => 'form-horizontal')) !!}
+                               @include('kelas._form')
 
-                        </form>
-                        </div>
+                               <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            {!! Form::submit('Simpan', array('class' => 'btn btn-success')) !!}
+                                            <a href="{{ URL::route('kelas.index') }}" class="btn btn-primary">Kembali</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
@@ -80,5 +32,18 @@
 </div>
 
 @endsection()
+@section('javascript')
+<script type="text/javascript">
+$(document).ready(function (){
+  
+      $( function()
+      {
+        $('[data-toggle="popover"]').popover()
+      }
+      );
+    $('.datepicker').datepicker();
+})
+</script>
+@endsection
 
 

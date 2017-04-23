@@ -101,7 +101,7 @@
                                 <th>Nama Siswa</th>
                                 <th>Alamat</th>
                                 <th>Jenis Kelamin</th>
-                                <th>Kelas</th>
+                                <th>Tingkat/Kelas</th>
                                 <th>Angkatan</th>
                                 <th>&nbsp;</th>
                               </thead>

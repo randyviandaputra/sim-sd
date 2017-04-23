@@ -9,42 +9,18 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body register">
-                        <div class="form-body">
-                        <form action="{{ route('matpel.update',$data[0]->id_matpel) }}" method="POST" class="form-horizontal">
-                            <div class="form-body">
+                        <div class="panel-body">
+
+                           {!! Form::model($query, array('route' => ['matpel.update', 'id' => $query->id_matpel], 
+                                'class' => 'form-horizontal')) !!}
+                               @include('matpel._form')
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">Kode Matpel</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="kode_matpel" class="form-control" value="{{ $data[0]->kode_matpel }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Nama Matpel</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="nama_matpel" class="form-control" value="{{ $data[0]->nama_matpel }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">KKM</label>
-                                    <div class="col-md-3">
-                                       <input type="text" name="kkm" class="form-control" value="{{ $data[0]->kkm }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                     <label class="col-md-3 control-label">Untuk Tingkat :</label>
                                     <div class="col-md-3">
                                     <div class="btn-group" data-toggle="buttons">
                                     <?php
                                         for ($i=1; $i < 7; $i++) {
-                                            $role = App\Models\role_matpel::where('id_matpel','=',$data[0]->id_matpel)->where('tingkat','=',$i)->first();
+                                            $role = App\Models\role_matpel::where('id_matpel','=',$query->id_matpel)->where('tingkat','=',$i)->first();
                                         ?>
                                         <label id="aktif{{$i}}"
                                             @if($role)
@@ -67,18 +43,16 @@
                                         @endif
                                     </div>
                                 </div>
-                            <br><br>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button class="btn btn-success">Simpan</button>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            {!! Form::submit('Simpan', array('class' => 'btn btn-success')) !!}
+                                            <a href="{{ URL::route('siswa.index') }}" class="btn btn-primary">Kembali</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{ csrf_field() }}
+                            {!! Form::close() !!}
 
-                        </form>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +61,8 @@
     </div>
 </div>
 
-@endsection()
+@endsection
+
 @section('javascript')
 
 <script type="text/javascript">
@@ -148,9 +123,14 @@
     }
 });
 </script>
+ <script type="text/javascript">
+
+      $( function()
+      {
+        $('[data-toggle="popover"]').popover()
+      }
+      );
+   </script>
 @endsection
-
-
-
 
 

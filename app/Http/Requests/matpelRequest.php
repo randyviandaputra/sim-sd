@@ -26,7 +26,7 @@ class matpelRequest extends Request
         return [
          'kode_matpel' => 'required',
          'nama_matpel' => 'required',
-         'kkm' => 'required',
+         'kkm' => 'required|numeric',
          'tingkat' => 'required',
         ];
     }
@@ -36,6 +36,7 @@ class matpelRequest extends Request
          'kode_matpel.required' => 'Kode matpel tidak boleh kosong', 
          'nama_matpel.required' => 'Nama matpel tidak boleh kosong',
          'kkm.required' => 'kkm tidak boleh kosong',
+         'kkm.numeric' => 'KKM harus berupa Angka',
          'tingkat.required' => 'tingkat tidak boleh kosong',
         ];
     }

@@ -60,7 +60,7 @@ class MatpelController extends Controller
 	public function edit($id)
 	{
 		$data['title'] = "Edit Matpel";
-		$data['data'] = matpel::where('id_matpel','=',$id)->get();
+		$data['query'] = matpel::where('id_matpel','=',$id)->first();
         $data['role'] = role_matpel::where('id_matpel','=',$id)->get();
 		return view('matpel.edit',$data);
 	}

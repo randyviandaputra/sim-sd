@@ -8,10 +8,13 @@ use App\Models\Guru;
 use App\Models\User;
 use App\Models\matpel;
 use App\Models\siswa;
+use App\Models\role_matpel;
 
 use App\Http\Requests\guruRequest;
 
 use Illuminate\Support\Facades\Input;
+
+use App\Helpers\Helper;
 use Session;
 use App\Http\Requests;
 
@@ -63,7 +66,9 @@ class GuruController extends Controller
     public function add()
     {
         $data['title'] = 'Tambah Guru';
+        $data['matpel'] = Matpel::drop_options();
         $data['data'] = matpel::orderBy('nama_matpel', 'asc')->get();
+        $data['jenis_kelamin'] = Helper::jenis_kelamin();
         if (count($data['data']) == 0) {
             Session::put('add_guru','Tambah Mata Pelajaran terlebih dahulu');
             return redirect()->route('matpel.add');
@@ -126,8 +131,10 @@ class GuruController extends Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Guru';
+        $data['matpel'] = Matpel::drop_options();
+        $data['jenis_kelamin'] = Helper::jenis_kelamin();
         $data['data'] = matpel::orderBy('nama_matpel', 'asc')->get();
-        $data['guru'] = Guru::find($id);
+        $data['query'] = Guru::find($id);
         return view('guru.edit', $data);
     }
 

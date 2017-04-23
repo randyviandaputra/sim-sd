@@ -9,42 +9,78 @@
     {!! Form::hidden('semester', $semester) !!}
     </div>
     <legend>Input Nilai {{ $matpel->nama_matpel }}</legend>
-    <div class="form-group">
-        {!! Form::label('', 'Nilai Tugas', array('class' => 'col-md-3 control-label')) !!}
+        @if($errors->has('nilai_tugas'))
+            <div class="form-group has-error has-feedback">
+             {!! Form::label('', 'Nilai Tugas', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+        @else
+            <div class="form-group">
+            {!! Form::label('', 'Nilai Tugas', array('class' => 'col-md-3 control-label')) !!}
+        @endif
         <div class="col-md-3">
-            {!! Form::text('nilai_tugas', null, array('class' => 'form-control')) !!}
             @if($errors->has('nilai_tugas'))
-            <span class="help-block" style="color:red;">{{ $errors->first('nilai_tugas') }}</span>
+            {!! Form::text('nilai_tugas', null, array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('nilai_tugas'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+             <span id="inputError2Status" class="sr-only">(error)</span>
+            @else
+                 {!! Form::text('nilai_tugas', null, array('class' => 'form-control')) !!}
             @endif
         </div>
     </div>
-    <div class="form-group">
-        {!! Form::label('', 'Nilai Absensi', array('class' => 'col-md-3 control-label')) !!}
+
+    @if($errors->has('nilai_absensi'))
+            <div class="form-group has-error has-feedback">
+             {!! Form::label('', 'Nilai Absensi', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+        @else
+            <div class="form-group">
+            {!! Form::label('', 'Nilai Absensi', array('class' => 'col-md-3 control-label')) !!}
+        @endif
         <div class="col-md-3">
-            {!! Form::text('nilai_absensi', null, array('class' => 'form-control')) !!}
             @if($errors->has('nilai_absensi'))
-            <span class="help-block" style="color:red;">{{ $errors->first('nilai_absensi') }}</span>
+            {!! Form::text('nilai_absensi', null, array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('nilai_absensi'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+             <span id="inputError2Status" class="sr-only">(error)</span>
+            @else
+                 {!! Form::text('nilai_absensi', null, array('class' => 'form-control')) !!}
             @endif
         </div>
     </div>
-    <div class="form-group">
-        {!! Form::label('', 'Nilai UTS', array('class' => 'col-md-3 control-label')) !!}
+
+    @if($errors->has('nilai_uts'))
+            <div class="form-group has-error has-feedback">
+             {!! Form::label('', 'Nilai UTS', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+        @else
+            <div class="form-group">
+            {!! Form::label('', 'Nilai UTS', array('class' => 'col-md-3 control-label')) !!}
+        @endif
         <div class="col-md-3">
-            {!! Form::text('nilai_uts', null, array('class' => 'form-control')) !!}
             @if($errors->has('nilai_uts'))
-            <span class="help-block" style="color:red;">{{ $errors->first('nilai_uts') }}</span>
+            {!! Form::text('nilai_uts', null, array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('nilai_uts'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+             <span id="inputError2Status" class="sr-only">(error)</span>
+            @else
+                 {!! Form::text('nilai_uts', null, array('class' => 'form-control')) !!}
             @endif
         </div>
     </div>
-    <div class="form-group">
-        {!! Form::label('', 'Nilai UAS', array('class' => 'col-md-3 control-label')) !!}
+
+    @if($errors->has('nilai_uas'))
+            <div class="form-group has-error has-feedback">
+             {!! Form::label('', 'Nilai UAS', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+        @else
+            <div class="form-group">
+            {!! Form::label('', 'Nilai UAS', array('class' => 'col-md-3 control-label')) !!}
+        @endif
         <div class="col-md-3">
-            {!! Form::text('nilai_uas', null, array('class' => 'form-control')) !!}
             @if($errors->has('nilai_uas'))
-            <span class="help-block" style="color:red;">{{ $errors->first('nilai_uas') }}</span>
+            {!! Form::text('nilai_uas', null, array('class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('nilai_uas'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+             <span id="inputError2Status" class="sr-only">(error)</span>
+            @else
+                 {!! Form::text('nilai_uas', null, array('class' => 'form-control')) !!}
             @endif
         </div>
     </div>
+
     <div class="form-group">
         {!! Form::label('', 'semester', array('class' => 'col-md-3 control-label')) !!}
         <div class="col-md-3">
