@@ -39,7 +39,7 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('status', 'Jenis Kelamin', array('class' => 'col-md-3 control-label')) !!}
+        {!! Form::label('status', 'Status', array('class' => 'col-md-3 control-label')) !!}
         <div class="col-md-3">
             {!! Form::select('aktif', $status, null, array('class' => 'form-control')) !!}
             @if($errors->has('aktif'))

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         {!! Form::model($query, array('route' => ['guru.update', 'id' => $query->id_guru], 
                                 'class' => 'form-horizontal')) !!}
                                @include('guru._form')
@@ -32,17 +32,19 @@
 
 @endsection()
 @section('javascript')
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-$(document).ready(function (){
-  
-      $( function()
-      {
+$(document).ready(function(){
+$( "#datepicker" ).datepicker({
+      autoclose: true,
+      dateFormat: 'yy-mm-dd',
+  });
+ $( function(){
         $('[data-toggle="popover"]').popover()
-      }
-      );
-    $('.datepicker').datepicker();
-})
+      });
+});
 </script>
 @endsection
-
-

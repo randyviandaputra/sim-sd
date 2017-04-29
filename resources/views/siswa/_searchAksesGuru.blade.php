@@ -4,7 +4,7 @@
             <input class="form-control" placeholder="Nama Siswa" name="cari_nama" type="text">
         </div>
         <div class="form-group">
-            <select class="form-control" name="cari_kelas" >
+            <select class="form-control" name="cari_kelas" required="">
                 <option value="">Pilih Kelas</option>
                 @foreach($kelasGuru as $key)
                 <option value="{{ $key->id_kelas }}">{{ $key['tingkat']."-".$key->nama_kelas }}</option>

@@ -40,7 +40,9 @@
                                     <td><?php echo $row->alamat ?></td>
                                     <td><?php echo $row->jenis_kelamin == 'Laki - Laki' ? 'Laki-Laki' : 'Perempuan' ?></td>
                                     <td><?php echo $row->matpel->nama_matpel ?></td>
-                                    <td style="text-align:center;width:15%;">
+                                    <td>
+                                    <a href="{{ URL::route('guru.detail', $row->id_guru) }}" class="btn btn-xs btn-default" >
+                                        <i class="fa fa-user-circle-o"></i>Detail</a>
                                         @if ($menu == 'sampah')
                                             <a href="{{ URL::route('guru.restore', $row->id_guru) }}" class="btn btn-xs btn-warning" data-confirm="Are you sure ?">
                                         <i class="fa fa-repeat"></i></a>

@@ -202,7 +202,8 @@ class SiswaController extends Controller
   
     public function show($id)
     {
-        
+         $data['siswa'] = siswa::with('kelas')->orderBy('nama_siswa', 'asc')->where('id_siswa','=',$id)->first();
+        return view('siswa.show',$data);
     }
 
   

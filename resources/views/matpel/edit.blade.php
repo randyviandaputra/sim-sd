@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
 
                            {!! Form::model($query, array('route' => ['matpel.update', 'id' => $query->id_matpel], 
                                 'class' => 'form-horizontal')) !!}
@@ -47,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">
                                             {!! Form::submit('Simpan', array('class' => 'btn btn-success')) !!}
-                                            <a href="{{ URL::route('siswa.index') }}" class="btn btn-primary">Kembali</a>
+                                            <a href="{{ URL::route('matpel.index') }}" class="btn btn-primary">Kembali</a>
                                         </div>
                                     </div>
                                 </div>

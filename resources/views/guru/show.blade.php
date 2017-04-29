@@ -63,8 +63,14 @@
                     </table>
               </div>
               <div class="modal-footer" style="margin:0; padding:0;">
-                    <a align="center" class="btn btn-success form-control frm print" href="{{ route('guru.index') }}"><i class="fa fa-back" aria-hidden="true"></i> Kembali</a>
-                  </div>
+                    <a align="center" class="btn btn-success form-control frm print" href="
+                    @if(Auth::user()->level == 1)
+                    {{ route('dashboard') }}
+                    @else
+                    {{ route('guru.index') }}
+                    @endif
+                    "><i class="fa fa-back" aria-hidden="true"></i> Kembali</a>
+              </div>
             </div>
           </div>
         </div>

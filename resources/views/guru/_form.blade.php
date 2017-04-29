@@ -65,13 +65,20 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-3 control-label">Tanggal Lahir </label>
+    @if($errors->has('tanggal_lahir'))
+            <div class="form-group has-error has-feedback">
+             {!! Form::label('', 'Tanggal Lahir', array('class' => 'col-md-3 control-label', 'for' => 'inputError2')) !!}
+        @else
+            <div class="form-group">
+            {!! Form::label('', 'Tanggal Lahir', array('class' => 'col-md-3 control-label')) !!}
+        @endif
         <div class="col-md-3">
-           <input type="date" name="tanggal_lahir" class="form-control">
-
-           @if($errors->has('tanggal_lahir'))
-            <span class="help-block" style="color:red;">{{ $errors->first('tanggal_lahir') }}</span>
+            @if($errors->has('tanggal_lahir'))
+            {!! Form::text('tanggal_lahir', null, array('id' => 'datepicker','class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('tanggal_lahir'), 'data-trigger' => 'focus','aria-describedby' => 'inputError2Status')) !!}
+             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+             <span id="inputError2Status" class="sr-only">(error)</span>
+            @else
+                 {!! Form::text('tanggal_lahir', null , array('id' => 'datepicker', 'class' => 'form-control')) !!}
             @endif
         </div>
     </div>

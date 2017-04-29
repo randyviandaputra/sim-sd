@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-body">
+                        <div class="panel-body register">
                         {!! Form::model($query, array('route' => ['kelas.update', 'id' => $query->id_kelas], 
                                 'class' => 'form-horizontal')) !!}
                                @include('kelas._form')

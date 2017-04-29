@@ -115,6 +115,8 @@
                                     <td>{{$row->kelas->tingkat."-".$row->kelas->nama_kelas}}</td>
                                     <td>{{$row->angkatan_tahun}}</td>
                                     <td>
+                                    <a href="{{ URL::route('siswa.detail', $row->id_siswa) }}" class="btn btn-xs btn-default" >
+                                        <i class="fa fa-user-circle-o"></i>Detail</a>
                                     @if(Auth::user()->level == 3)
                                         @if ($menu == 'sampah')
                                             <a href="{{ URL::route('siswa.restore', $row->id_siswa) }}" class="btn btn-xs btn-warning" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure ?">

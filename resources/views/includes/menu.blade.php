@@ -61,6 +61,11 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ Auth::user()->username }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            @if(Auth::user()->level == 1)
+                                <li><a href="{{ route('guru.detail', Auth::user()->user_id) }}">Profile</a></li>
+                            @elseif(Auth::user()->level == 2)
+                                <li><a href="{{ route('siswa.detail', Auth::user()->user_id) }}">Profile</a></li>
+                            @endif
                              <li><a href="{{route('logout')}}">Logout</a></li>
                         </ul>
                     </li>

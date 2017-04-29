@@ -56,7 +56,7 @@
         @endif
         <div class="col-md-3">
             @if($errors->has('tanggal_lahir'))
-            {!! Form::text('tanggal_lahir', null, array('id' => 'datepicker','class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('tanggal_lahir'), 'data-trigger' => 'focus', 'id' => 'inputError2','aria-describedby' => 'inputError2Status')) !!}
+            {!! Form::text('tanggal_lahir', null, array('id' => 'datepicker','class' => 'form-control','data-container' => 'body', 'data-toggle' => 'popover', 'data-placement' => 'right', 'data-content' => $errors->first('tanggal_lahir'), 'data-trigger' => 'focus','aria-describedby' => 'inputError2Status')) !!}
              <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
              <span id="inputError2Status" class="sr-only">(error)</span>
             @else

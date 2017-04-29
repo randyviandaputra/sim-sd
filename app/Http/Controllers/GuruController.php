@@ -125,7 +125,8 @@ class GuruController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['guru'] = Guru::with('matpel')->orderBy('nama_guru', 'asc')->where('id_guru','=',$id)->first();
+        return view('guru.show',$data);
     }
 
     public function edit($id)

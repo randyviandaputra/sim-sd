@@ -36,6 +36,7 @@ Route::group(['middleware' => 'tools'],function(){
 			route::post('/edit/{id}',['uses' => 'GuruController@update', 'as' => 'guru.update']);
 			route::get('/delete/{id}',['uses' => 'GuruController@delete', 'as' => 'guru.delete']);
 			route::get('/restore/{id}',['uses' => 'GuruController@restore', 'as' => 'guru.restore']);
+			route::get('/profile/{id}',['uses' => 'GuruController@show', 'as' => 'guru.detail']);
 		});
 
 		route::group(['prefix' => 'kelas'], function(){
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'tools'],function(){
 			route::get('/delete/{id}',['uses' => 'SiswaController@delete', 'as' => 'siswa.delete']);
 			route::get('/pdf',['uses' => 'SiswaController@pdf', 'as' => 'siswa.pdf']);
 			route::get('/restore/{id}',['uses' => 'SiswaController@restore', 'as' => 'siswa.restore']);
+			route::get('/profile/{id}',['uses' => 'SiswaController@show', 'as' => 'siswa.detail']);
 		});
 
 		route::group(['prefix' => 'walikelas'], function(){
