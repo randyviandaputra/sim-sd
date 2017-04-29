@@ -40,6 +40,10 @@
                                 <li><a href="{{ route('kelas.index') }}">Kelas</a></li>
                                 <li><a href="{{ route('matpel.index') }}">Matpel</a></li>
                             @elseif(Auth::user()->level == 2)
+                               <?php 
+                                    $kelas =  App\Models\siswa::where('id_siswa',Auth::user()->user_id)->first();
+                                ?>
+                                <li><a href="{{ route('jadwal.show', $kelas->id_kelas) }}">Jadwal</a></li>
                                 <li><a href="{{ route('nilai.show', Auth::user()->user_id) }}">Nilai</a></li>
                             @elseif(Auth::user()->level == 1)
                                 <li><a href="{{ route('siswa.index') }}">Siswa</a></li>
