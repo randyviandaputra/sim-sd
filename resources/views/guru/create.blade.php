@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-body register">
-                        {!! Form::open(array('route' => 'guru.store', 'class' => 'form-horizontal')) !!}
+                        {!! Form::open(array('route' => 'guru.store', 'class' => 'form-horizontal', 'enctype' =>'multipart/form-data')) !!}
                                @include('guru._form')
 
                                @if($errors->has('email'))

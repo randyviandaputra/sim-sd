@@ -11,7 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body register">
                         {!! Form::model($query, array('route' => ['guru.update', 'id' => $query->id_guru], 
-                                'class' => 'form-horizontal')) !!}
+                                'class' => 'form-horizontal', 'enctype' =>'multipart/form-data')) !!}
                                @include('guru._form')
                                <div class="form-group">
                                     <div class="row">

@@ -11,7 +11,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-body register">
                         {!! Form::model($query, array('route' => ['siswa.update', 'id' => $query->id_siswa], 
-                                'class' => 'form-horizontal')) !!}
+                                'class' => 'form-horizontal', 'enctype' =>'multipart/form-data')) !!}
                                @include('siswa._form')
 
                                <div class="form-group">
