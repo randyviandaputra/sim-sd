@@ -99,6 +99,7 @@ class MatpelController extends Controller
 	public function delete($id)
 	{
 		$data = matpel::find($id);
+        // dump($id, $data);exit;
 		$data->delete();
 		return redirect('matpel');
 	}

@@ -38,7 +38,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="modal-header">
 						<h1 class="modal-title" id="myModalLabel">
-							<img class="register-logo" src="http://1.bp.blogspot.com/-Bh67v_o9ouY/VCAlZp1s-2I/AAAAAAAAAQk/MESy8z88hp4/s1600/Logo%2BSD%2B(sekolah%2Bdasar).png" style="width:90px;">
+							<img class="register-logo" src="/assets/img/logo_sd.png" style="width:90px;">
 							<strong class="register-heading">Data Sekolah</strong>
 						</h1>
 					</div>
@@ -95,7 +95,7 @@
 					</div>
 					<div class="modal-footer col-md-12 col-sm-12 col-xs-12" style="margin-right:0; padding-right:0;">
 						<div class="col-md-12">
-							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
+							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Teddi Kuspiadi | NPM :13402396 | All Right Reserved</p>
 						</div>
 					</div>
 				</div>

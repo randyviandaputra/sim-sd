@@ -72,7 +72,9 @@ body{
 /* Header */
 
 .header{
-    background-color: #2282C8;
+    /*background-color: #2282C8;*/
+    background-image: url('/assets/img/header.png');
+    height: 300px;
 }
 
 /* Register */
@@ -124,6 +126,7 @@ body{
     border-radius: 0px;
     height: auto;
     overflow: hidden;
+    text-align: justify;
     margin-bottom: 10px;
 }
 

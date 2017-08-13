@@ -36,7 +36,7 @@
 					</div>
 					<div class="modal-footer col-md-12 col-sm-12 col-xs-12" style="margin-right:0; padding-right:0;">
 						<div class="col-md-12">
-							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Programmer Ripuh Team | All Right Reserved</p>
+							<p class="text-muted register-footer" align="center">Copyright &copy; @php echo date('Y') @endphp | Created By : Teddi Kuspiadi | NPM : 13402396 | All Right Reserved</p>
 						</div>
 					</div>
 				</div>

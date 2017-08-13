@@ -58,7 +58,7 @@
                       <tr>
                         <td>Tempat Tanggal Lahir</td>
                         <td>:</td>
-                        <td>{{$guru->tempat_lahir.", ".$guru->tanggal_lahir}}</td>
+                        <td>{{$guru->tempat_lahir.", ".date('d F Y', strtotime($guru->tanggal_lahir))}}</td>
                       </tr>
                     </table>
               </div>
